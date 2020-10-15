@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/ivImg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:layout_weight="0.4"
+                 />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:padding="8dp"
+
+                >
+                <TextView
+                    android:id="@+id/tvProduct_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Goldstar shoes"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/roboto_slab_bold"
+                      android:textStyle="bold"
+ />
+
+                <TextView
+                    android:id="@+id/tvOrderedID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+
+
+                    android:fontFamily="@font/roboto_slab_light"
+                    android:textColor="@color/Black"
+
+                    android:text="Order id: 21414141" />
+
+                <TextView
+                    android:id="@+id/tvOrderedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/roboto_slab_light"
+                    android:textColor="@color/Black"
+
+
+
+                    android:text="Order Date:2020-9-16" />
+
+                <TextView
+                    android:id="@+id/tvQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/roboto_slab_light"
+                    android:textColor="@color/Black"
+                    android:text="Qty: 2"
+
+                    />
+
+
+
+
+
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="5dp"
+                        android:text="Rs. 3200"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto_slab_bold"
+
+                        android:textColor="@color/colorPrimary"
+
+                        />
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/colorGray"/>
+        <TextView
+            android:id="@+id/tvFullDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/transparentColor"
+             android:layout_marginTop="10dp"
+            android:textStyle="bold"
+
+            android:drawablePadding="10dp"
+            android:text="See full details"
+            android:layout_marginBottom="5dp"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.05dp"
+            android:background="@color/colorGray"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/hiddenLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Discount Applied: 10%"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+
+
+                />
+
+            <TextView
+                android:id="@+id/tvDeliveryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                  android:text="Address"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+                />
+
+            <TextView
+                android:id="@+id/tvDeliveredDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                 android:text="Date"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+                />
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Color"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+                />
+            <TextView
+                android:id="@+id/tvSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Size"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+                />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Payment: On Delivery"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textColor="@color/Black"
+
+
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

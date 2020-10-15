@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.AddProductFragment.addProductSecondPage"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:orientation="vertical"
+        android:layout_marginBottom="80dp"
+        >
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADDITIONAL INFORMATIONS"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"/>
+
+    <View
+        android:layout_width="150dp"
+        android:layout_marginBottom="10dp"
+
+        android:layout_height="4dp"
+        android:background="@color/colorPrimary"/>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#fff"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
+                app:errorEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etBrand"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:textColor="#000"
+                    app:passwordToggleTint="@color/colorPrimary"
+                    android:hint="Enter Brand Name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="15"
+
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+
+              />
+
+
+
+                <Spinner
+                    android:id="@+id/spCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  android:layout_marginStart="10dp"
+
+
+                    />
+
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                app:counterEnabled="true"
+                app:counterMaxLength="2"
+
+
+                app:errorEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDiscount"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:textColor="#000"
+                    app:passwordToggleTint="@color/colorPrimary"
+                    android:hint="Enter Discount "
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="2"
+
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorGray"
+                android:text="Note: Enter 0 for no discount..you can give discount later also"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+              />
+
+
+            <Spinner
+                    android:id="@+id/spType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+
+                />
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                app:counterEnabled="true"
+                app:counterMaxLength="3"
+                app:errorEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etStock"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:textColor="#000"
+                    app:passwordToggleTint="@color/colorPrimary"
+                    android:hint="Enter stock you have"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorGray"
+                android:text="Stock is decreased automatically on sales..you can increase stock also"/>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etSku"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:textColor="#000"
+                    app:passwordToggleTint="@color/colorPrimary"
+                    android:hint="Enter sku of the product"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="20"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_marginTop="10dp"
+                >
+
+
+            <TextView
+                android:id="@+id/tvPrevious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Previous"
+                android:textAlignment="center"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="20dp"
+                android:textSize="18sp"
+                android:textColor="#B22222"/>
+
+
+
+                <TextView
+                    android:id="@+id/tvNext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:textSize="18sp"
+                    android:layout_weight="0.5"
+                    android:textAlignment="center"
+                    android:textColor="#006400"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

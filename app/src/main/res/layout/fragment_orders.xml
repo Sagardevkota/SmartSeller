@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+
+    tools:context=".ui.home.orders">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="#d8d8d8"
+        app:tabPadding="5dp"
+        app:tabTextAppearance="@style/TabLayoutStyle"
+        android:layout_gravity="clip_horizontal"
+        app:tabMode="fixed"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/White"
+        android:fontFamily="@font/text_me_one"
+        android:textStyle="bold"
+
+
+
+        app:tabSelectedTextColor="#fff"
+
+
+        >
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+
+
+
+
+    <androidx.viewpager.widget.ViewPager
+
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="#Fff"
+        android:scrollbars="none"
+
+
+        />
+
+
+
+
+</LinearLayout>

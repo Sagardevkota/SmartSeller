@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.MyProductFragment.MyProductDetailsEdit">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp"
+
+        >
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+
+            android:weightSum="2"
+
+            >
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Add Products"
+
+                android:textSize="18sp"
+                android:layout_weight="0.25"
+                android:padding="10dp"
+
+                android:src="@drawable/ic_baseline_arrow_back_24"
+
+
+                />
+
+            <TextView
+                android:id="@+id/tvProductTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Add Products"
+
+                android:textStyle="bold"
+
+                android:gravity="center"
+                android:textColor="@color/White"
+
+
+                android:textSize="18sp"
+                android:layout_weight="1.5"
+
+                />
+
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"
+                android:text="SAVE"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+
+                android:src="@color/cardview_dark_background"/>
+
+
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+            <EditText
+                android:id="@+id/etProduct_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CyberPunk 2077"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_slab_light"
+                android:textSize="22sp"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etDesc"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Newly Released game"
+                android:fontFamily="@font/roboto_slab_light"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:maxLength="250"
+                android:maxLines="5"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Description"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rs.200"
+
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_slab_light"
+
+                android:textSize="18sp"
+                android:textColor="#ff00"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:fontFamily="@font/text_me_one"
+                android:textColor="@color/Black"
+
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Discount"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Project red"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_slab_light"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Brand"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etSku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="201150150"
+                android:textColor="@color/Black"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_slab_light"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SKU"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <Spinner
+                android:id="@+id/spType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+
+
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+
+
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+            <EditText
+                android:id="@+id/etStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Games"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_slab_light"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stock"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+
+            <EditText
+                android:id="@+id/etColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Games"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_slab_light"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Color (Note: Enter color like (red,blue))"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+
+
+
+            <EditText
+                android:id="@+id/etSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Games"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_slab_light"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Size (Note: Enter size like (39,40))"
+                android:textColor="@color/Black"
+                android:fontFamily="@font/roboto_slab_thin"
+
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F8F8F8"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

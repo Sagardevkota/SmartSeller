@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/primaryShade"
+
+    >
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Welcome Sagar"
+        android:textAlignment="textStart"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        android:padding="8dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fafafc"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:background="@color/White"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="5283"
+                                android:textAlignment="center"
+                                android:textColor="@color/Black"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Total Sales"
+                                android:textAlignment="center" />
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/lcTotalOrders"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:background="@color/White"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="236"
+                                android:textAlignment="center"
+                                android:textColor="@color/Black"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Order Delivered"
+                                android:textAlignment="center" />
+
+                            <com.github.mikephil.charting.charts.HorizontalBarChart
+                                android:id="@+id/hzChart"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:background="@color/White"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Total"
+                                android:textAlignment="center"
+                                android:textColor="@color/Black"
+                                android:textSize="18sp" />
+
+
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/pcOrders"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+
+                                />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/White"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="236"
+                                android:textAlignment="center"
+                                android:textColor="@color/Black"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Order Delivered"
+                                android:textAlignment="center" />
+
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:layout_width="match_parent"
+                                android:layout_height="110dp" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:background="@color/White"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="236"
+                                android:textAlignment="center"
+                                android:textColor="@color/Black"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Order Delivered"
+                                android:textAlignment="center" />
+
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:layout_width="match_parent"
+                                android:layout_height="110dp" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>
+
+

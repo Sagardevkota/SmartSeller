@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">SmartSeller</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="description"><b><h6>Description: </h6></b></string>
+
+    <string name="price"><h6>Price: </h6>Rs. </string>
+
+
+    <string name="brand"><h6>Brand: </h6></string>
+
+    <string name="discount"><h6>Discount: </h6></string>
+
+    <string name="sku"><h6>Sku: </h6></string>
+
+    <string name="type"><h6>Type: </h6></string>
+
+    <string name="category"><h6>Category: </h6></string>
+
+
+    <string-array name="category">
+        <item>Shirts</item>
+        <item>Pants</item>
+        <item>Jackets</item>
+        <item>Shoes</item>
+        <item>Watches</item>
+        <item>Others</item>
+        <item>Computers And Accessories</item>
+        <item>Cell Phones And Accessories</item>
+        <item>Video Games And Consoles</item>
+        <item>Television And Video</item>
+        <item>Headphones</item>
+        <item>Antivirus And Security</item>
+        <item>Design And Illustration</item>
+        <item>Music</item>
+        <item>Operating System</item>
+    </string-array>
+    <string-array name="Type">
+        <item>Mens Fashion</item>
+        <item>Womens Fashion</item>
+        <item>Babys Fashion</item>
+        <item>Electronics</item>
+        <item>Software</item>
+        <item>Help And Settings</item>
+
+
+    </string-array>
+
+</resources>

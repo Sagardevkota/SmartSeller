@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.AccountFragment.AccountEdit">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:weightSum="2"
+
+        android:layout_marginBottom="10dp"
+
+        >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+
+            android:textSize="18sp"
+            android:layout_weight="0.25"
+            android:padding="10dp"
+
+            android:src="@drawable/ic_baseline_arrow_back_24"
+
+
+            />
+
+        <TextView
+            android:id="@+id/tvProductTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Edit Account"
+            android:fontFamily="@font/text_me_one"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+
+            android:textColor="@color/White"
+            android:textSize="18sp"
+            android:layout_weight="1.75"
+
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/White"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                android:hint="Username"
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etEmail"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:drawableStart="@drawable/ic_male"
+                    android:drawablePadding="10dp"
+
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="sagardevkota55@gmail.com"
+
+
+                    android:textColor="#000"
+                    android:gravity="start"
+
+
+                    app:passwordToggleTint="@color/colorPrimary"
+
+                    android:inputType="textEmailAddress"
+
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buSaveEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@color/transparentColor"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+
+
+                android:text="Save"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F8F8F8"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="Mobile"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPhone"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:drawableStart="@drawable/ic_phone_android_24"
+                    android:drawablePadding="10dp"
+
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="9846710086"
+
+
+                    android:textColor="#000"
+                    android:gravity="start"
+
+
+                    app:passwordToggleTint="@color/colorPrimary"
+
+                    android:inputType="textEmailAddress"
+
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buSavePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@color/transparentColor"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+
+
+                android:text="Save"/>
+
+        </RelativeLayout>
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F8F8F8"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#fff"
+                app:placeholderTextColor="#000"
+                android:hint="Address"
+                >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_location_on_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="new road,pokhara"
+                    android:textColor="#000"
+                    android:gravity="start"
+                    android:inputType="textEmailAddress"
+
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buSaveDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@color/transparentColor"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+
+
+                android:text="Save"/>
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/colorGray"
+            />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F8F8F8"
+
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/tvAccountType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SELLER"
+            android:textColor="@color/Black"
+            android:drawableStart="@drawable/ic_account_circle_24px"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/colorPrimary"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Type"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/colorGray"
+            />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F8F8F8"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
