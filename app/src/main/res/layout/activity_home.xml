@@ -55,7 +55,7 @@
                     android:text="Dashboard"
                     android:textColor="@color/White"
                     android:gravity="center"
-                    android:fontFamily="@font/text_me_one"
+                    android:fontFamily="sans-serif-thin"
                     android:textStyle="bold"
                     android:textSize="20sp"
 
@@ -151,7 +151,7 @@
                 android:drawableTop="@drawable/ic_home_24px"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textStyle="bold"
 
                 android:gravity="center_horizontal"
@@ -171,7 +171,7 @@
                 android:drawableTop="@drawable/ic_orders"
                 android:textColor="#000"
                 android:textAlignment="center"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textStyle="bold"
 
                 android:text="orders"
@@ -186,7 +186,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:textColor="#000"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textStyle="bold"
 
                 android:text="add Product"
@@ -200,7 +200,7 @@
                 android:drawableTop="@drawable/ic_product"
                 android:textColor="#000"
                 android:textAlignment="textEnd"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textStyle="bold"
 
                 android:text="products"
@@ -215,7 +215,7 @@
                 android:drawableTop="@drawable/ic_account_circle_24px"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textStyle="bold"
 
                 android:gravity="center_horizontal"

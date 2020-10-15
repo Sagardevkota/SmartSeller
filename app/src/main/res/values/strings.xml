@@ -25,6 +25,7 @@
         <item>Jackets</item>
         <item>Shoes</item>
         <item>Watches</item>
+        <item>Dresses</item>
         <item>Others</item>
         <item>Computers And Accessories</item>
         <item>Cell Phones And Accessories</item>
@@ -42,7 +43,7 @@
         <item>Babys Fashion</item>
         <item>Electronics</item>
         <item>Software</item>
-        <item>Help And Settings</item>
+        <item>Tools And Outdoor</item>
 
 
     </string-array>

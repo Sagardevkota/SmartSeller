@@ -41,7 +41,7 @@
             android:background="@color/cardview_dark_background"
 
             android:gravity="center"
-            android:fontFamily="@font/text_me_one"
+            android:fontFamily="sans-serif-thin"
             android:text="Name"
             android:textColor="@color/White"
             android:textStyle="bold"

@@ -165,6 +165,8 @@ public class MyProductDetailsEdit extends Fragment {
         binding.etDiscount.setText(String.valueOf(products.getDiscount()));
         binding.etStock.setText(String.valueOf(products.getStock()));
 
+
+
         productId=products.getProductId();
         picturePath=products.getPicture_path();
         binding.etColor.setText(products.getColor());
@@ -297,6 +299,19 @@ public class MyProductDetailsEdit extends Fragment {
         List<String> categorylist= Arrays.asList(getResources().getStringArray(R.array.category));
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,categorylist);
         binding.spCategory.setAdapter(arrayAdapter);
+        int positionOfSelectedCategory = 0;
+        Products products = getArguments().getParcelable("productObj");
+        String selectedCategory = products.getCategory();
+        for (String category:categorylist){
+            if (category.equalsIgnoreCase(selectedCategory))
+                break;
+            positionOfSelectedCategory++;
+        }
+
+
+        binding.spCategory.setSelection(positionOfSelectedCategory,true);
+
+
         binding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -314,6 +329,16 @@ public class MyProductDetailsEdit extends Fragment {
         List<String> typelist= Arrays.asList(getResources().getStringArray(R.array.Type));
         ArrayAdapter<String> arraytypeAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,typelist);
         binding.spType.setAdapter(arraytypeAdapter);
+        int positionOfSelectedType = 0;
+        String selectedType = products.getType();
+        for (String type:typelist){
+            if (type.equalsIgnoreCase(selectedType))
+                break;
+            positionOfSelectedType++;
+        }
+
+        binding.spType.setSelection(positionOfSelectedType,true);
+
         binding.spType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

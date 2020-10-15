@@ -28,7 +28,7 @@
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Add Products"
+                android:text="Edit Product"
 
                 android:textSize="18sp"
                 android:layout_weight="0.25"
@@ -43,14 +43,11 @@
                 android:id="@+id/tvProductTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Add Products"
-
+                android:text="Edit Product"
                 android:textStyle="bold"
-
                 android:gravity="center"
                 android:textColor="@color/White"
-
-
+                android:fontFamily="sans-serif-thin"
                 android:textSize="18sp"
                 android:layout_weight="1.5"
 
@@ -113,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
                 android:textStyle="bold"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
                 android:textSize="22sp"
                 />
             <TextView
@@ -121,8 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
                 />
 
 
@@ -140,9 +136,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text="Newly Released game"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
+                android:textStyle="bold"
                 android:textSize="18sp"
                 android:maxLength="250"
                 android:maxLines="5"
@@ -152,9 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product Description"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
-
+                android:fontFamily="sans-serif-light"
 
 
                 />
@@ -176,7 +171,8 @@
                 android:text="Rs.200"
 
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="bold"
 
                 android:textSize="18sp"
                 android:textColor="#ff00"
@@ -186,8 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Price"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -206,8 +201,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10"
-                android:fontFamily="@font/text_me_one"
+                android:fontFamily="sans-serif-thin"
                 android:textColor="@color/Black"
+                android:textStyle="bold"
 
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
@@ -216,8 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Discount"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -239,15 +234,15 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="bold"
                 />
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Brand"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -269,15 +264,15 @@
                 android:textColor="@color/Black"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="bold"
                 />
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="SKU"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -304,8 +299,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Type"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -332,8 +326,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Category"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -351,19 +344,19 @@
                 android:id="@+id/etStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Games"
+                android:text="2"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
+                android:textStyle="bold"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
                 />
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Stock"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -386,15 +379,15 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:fontFamily="sans-serif-thin"
+                android:textStyle="bold"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Color (Note: Enter color like (red,blue))"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 
@@ -417,15 +410,15 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/Black"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-thin"
                 />
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Size (Note: Enter size like (39,40))"
-                android:textColor="@color/Black"
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-light"
 
                 />
 

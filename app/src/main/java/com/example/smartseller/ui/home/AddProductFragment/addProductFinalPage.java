@@ -130,11 +130,7 @@ public class addProductFinalPage extends Fragment {
                 addColor.enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                        if (response.isSuccessful())
-                        {
-                            Toasty.success(getContext(),response.body().getMessage()).show();
-
-                        }
+                        
 
                     }
 
@@ -150,8 +146,7 @@ public class addProductFinalPage extends Fragment {
                 sizeCall.enqueue(new Callback<JsonResponse>() {
                     @Override
                     public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                        if (response.isSuccessful())
-                            Toasty.success(getContext(),response.body().getMessage()).show();
+
 
                     }
 
@@ -163,8 +158,6 @@ public class addProductFinalPage extends Fragment {
 
 
 
-
-        if (color.isEmpty()&&sizeStr.isEmpty())
             showOkDialog();
 
 
