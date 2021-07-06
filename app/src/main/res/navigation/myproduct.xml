@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/myproductFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myproduct">
+
+    <fragment
+        android:id="@+id/myproductFragment"
+        android:label="My Product Fragment"
+        android:name="com.example.smartseller.ui.home.MyProductFragment.MyProduct"
+        tools:layout="@layout/fragment_my_product"
+        >
+
+        <action
+            app:destination="@+id/myproductDetailsFragment"
+            android:id="@+id/action_product_to_its_details"
+            />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myproductDetailsFragment"
+        android:label="My Product Details Fragment"
+        android:name="com.example.smartseller.ui.home.MyProductFragment.MyProductDetails"
+        tools:layout="@layout/fragment_my_product_details"
+        >
+
+        <action
+            app:destination="@id/myproductDetailsEditFragment"
+            android:id="@+id/action_product_to_its_details_edit"
+            />
+
+
+        <argument
+            android:name="product"
+            app:argType="com.example.smartseller.data.model.Products"
+            />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myproductDetailsEditFragment"
+        android:label="My Product Details Edit Fragment"
+        android:name="com.example.smartseller.ui.home.MyProductFragment.MyProductDetailsEdit"
+        tools:layout="@layout/fragment_my_product_details_edit"
+        >
+
+        <argument
+            android:name="product"
+            app:argType="com.example.smartseller.data.model.Products"
+            />
+
+
+    </fragment>
+
+</navigation>

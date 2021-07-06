@@ -78,7 +78,7 @@ public class MessageFragment extends Fragment {
 
     private void getConversations() {
         Session session=new Session(getContext());
-        Call<List<MessageResponse>> call= SmartAPI.getApiService().getConversations(session.getJWT(),session.getUserId());
+        Call<List<MessageResponse>> call= SmartAPI.getApiService().getConversations(session.getJWT());
         call.enqueue(new Callback<List<MessageResponse>>() {
             @Override
             public void onResponse(Call<List<MessageResponse>> call, Response<List<MessageResponse>> response) {

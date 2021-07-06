@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.AddProductFragment.addProductSecondPage"
     android:orientation="vertical"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@ android:orientation="vertical"
         android:textColor="@color/colorPrimary"/>
 
     <View
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
 
         android:layout_height="4dp"
@@ -227,12 +227,98 @@ android:orientation="vertical"
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OPTIONAL INFROMATIONS"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+
+                    />
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvAddColors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Click here to add colors"
+                        android:layout_gravity="center"
+                        android:layout_alignParentEnd="true"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colors:"
+                        android:textSize="18sp"
+                        android:gravity="bottom"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        />
+
+                </RelativeLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/colorChipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvAddSizes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Click here to add sizes"
+                        android:layout_gravity="center"
+                        android:layout_alignParentEnd="true"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sizes:"
+                        android:textSize="18sp"
+                        android:gravity="bottom"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        />
+
+                </RelativeLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/sizeChipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+
+                    />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 >
 
 

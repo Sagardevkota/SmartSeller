@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.smartseller.R;
 import com.example.smartseller.ui.home.adapter.TabPagerAdapter;
+import com.example.smartseller.ui.home.homeFragment.home;
 import com.example.smartseller.ui.home.orders.fragments.innerFragments.CompletedOrders;
 import com.example.smartseller.ui.home.orders.fragments.innerFragments.NewOrders;
 import com.example.smartseller.ui.home.orders.fragments.innerFragments.DispatchedOrders;
@@ -20,8 +21,8 @@ import com.google.android.material.tabs.TabLayout;
 
 
 public class Orders extends Fragment {
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
 
     public Orders() {
@@ -29,14 +30,13 @@ public class Orders extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_orders, container, false);
-        tabLayout=v.findViewById(R.id.tab_layout);
-        viewPager=v.findViewById(R.id.fragment_container);
+        View v = inflater.inflate(R.layout.fragment_orders, container, false);
+        tabLayout = v.findViewById(R.id.tab_layout);
+        viewPager = v.findViewById(R.id.fragment_container);
         return v;
     }
 
@@ -44,6 +44,7 @@ public class Orders extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+
         tabLayout.setupWithViewPager(viewPager);
         SetupViewPager(viewPager);
         tabLayout.getTabAt(0).setText("New Orders");
@@ -51,11 +52,11 @@ public class Orders extends Fragment {
         tabLayout.getTabAt(2).setText("Completed Orders");
     }
 
-    public void SetupViewPager(ViewPager viewPager){
-        TabPagerAdapter tabPagerAdapter=new TabPagerAdapter(getChildFragmentManager(),1);
-        tabPagerAdapter.addFragment(new NewOrders(),"New Orders");
-        tabPagerAdapter.addFragment(new DispatchedOrders(),"Dipatched Orders");
-        tabPagerAdapter.addFragment(new CompletedOrders(),"Completed Orders");
+    public void SetupViewPager(ViewPager viewPager) {
+        TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getChildFragmentManager(), 1);
+        tabPagerAdapter.addFragment(new NewOrders(), "New Orders");
+        tabPagerAdapter.addFragment(new DispatchedOrders(), "Dispatched Orders");
+        tabPagerAdapter.addFragment(new CompletedOrders(), "Completed Orders");
         viewPager.setAdapter(tabPagerAdapter);
     }
 

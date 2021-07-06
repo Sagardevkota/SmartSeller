@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     tools:context=".ui.home.orders.fragments.innerFragments.OrderDetails">
 
 
@@ -16,60 +14,14 @@
 
         >
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-
-            android:weightSum="2"
-
-            >
-
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Add Products"
-
-
-                android:layout_weight="0.25"
-                android:padding="10dp"
-
-
-                android:src="@drawable/ic_baseline_arrow_back_24"
-
-
-                />
-
-            <TextView
-                android:id="@+id/tvProductTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Add Products"
-
-                android:fontFamily="@font/text_me_one"
-                android:textStyle="bold"
-
-                android:gravity="start|center"
-                android:textColor="@color/White"
-
-
-                android:textSize="18sp"
-                android:layout_weight="1.75"
-
-                />
-
-
-
-
-
-
-
-
-        </LinearLayout>
-
-
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,9 +54,8 @@
                 android:layout_height="wrap_content"
                 android:text="CyberPunk 2077"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_slab_bold"
-                android:textColor="@color/Black"
-
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/colorPrimary"
                 android:textSize="22sp"
                 />
 
@@ -113,8 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
-                android:fontFamily="@font/roboto_slab_thin"
-
+                android:fontFamily="sans-serif-thin"
                 android:textColor="@color/Black"
                 />
 
@@ -132,12 +82,7 @@
                 android:id="@+id/tvQty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2"
-                android:fontFamily="@font/roboto_slab_light"
-                android:textColor="@color/Black"
-
-
-
+                android:text="Number"
                 android:textSize="18sp"
                 />
             <TextView
@@ -146,8 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="Qty"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -164,10 +108,8 @@
                 android:id="@+id/tvPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rs.200"
+                android:text="Rs."
 
-                android:fontFamily="@font/text_me_one"
-                android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#ff00"
                 />
@@ -178,8 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="Price"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -196,11 +137,7 @@
                 android:id="@+id/tvOrderedUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sagardevkota"
-                android:fontFamily="@font/roboto_slab_light"
-                android:textColor="@color/Black"
-
-
+                android:text="Name"
 
                 android:textSize="18sp"
                 />
@@ -210,10 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ordered By"
-
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -230,11 +165,7 @@
                 android:id="@+id/tvOrderedContactNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="981234567"
-                android:fontFamily="@font/roboto_slab_light"
-
-
-                android:textColor="@color/Black"
+                android:text="Phone"
                 android:textSize="18sp"
                 />
 
@@ -244,8 +175,7 @@
                 android:layout_height="wrap_content"
                 android:text="Contact number"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -262,21 +192,15 @@
                 android:id="@+id/tvOrderedDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2020-6-2"
-                android:textColor="@color/Black"
-
+                android:text="Date"
                 android:textSize="18sp"
-               android:fontFamily="@font/roboto_slab_light"
                 />
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ordered Date"
-
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -293,12 +217,8 @@
                 android:id="@+id/tvDeliveryAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="new road,Pokhara"
-                android:textColor="@color/Black"
-
+                android:text="Address"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
-
                 />
             <TextView
 
@@ -306,8 +226,7 @@
                 android:layout_height="wrap_content"
                 android:text="Delivery Address"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -324,11 +243,9 @@
                 android:id="@+id/tvproductSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="41"
-                android:textColor="@color/Black"
-
+                android:text="Size"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+
 
                 />
             <TextView
@@ -337,8 +254,7 @@
                 android:layout_height="wrap_content"
                 android:text="Product Size"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -355,11 +271,9 @@
                 android:id="@+id/tvProductColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Red"
-                android:textColor="@color/Black"
-
+                android:text="Color"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+
                 />
             <TextView
 
@@ -367,8 +281,7 @@
                 android:layout_height="wrap_content"
                 android:text="Product Color"
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
 
 
@@ -386,10 +299,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Waiting"
-                android:textColor="@color/Black"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
+
                 />
 
             <RelativeLayout
@@ -402,10 +314,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Status"
-
                 android:textColor="@color/Black"
-
-                android:fontFamily="@font/roboto_slab_thin"
+                android:fontFamily="sans-serif-thin"
                 />
                 <TextView
                     android:id="@+id/tvChangeStatus"
@@ -414,7 +324,6 @@
                     android:layout_alignParentRight="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
-                    android:fontFamily="@font/text_me_one"
                     android:textStyle="bold"
                     android:text="Change"/>
 
@@ -431,10 +340,8 @@
                 android:id="@+id/tvDeliveredDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/Black"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
-                android:fontFamily="@font/roboto_slab_light"
                 />
 
             <RelativeLayout
@@ -449,8 +356,7 @@
                     android:layout_height="wrap_content"
                     android:text="Delivered Date"
                     android:textColor="@color/Black"
-
-                    android:fontFamily="@font/roboto_slab_thin"
+                    android:fontFamily="sans-serif-thin"
                     />
                 <TextView
                     android:id="@+id/tvChangeDeliveredDate"
@@ -460,7 +366,6 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/roboto_slab_light"
                     android:text="Change"/>
 
             </RelativeLayout>

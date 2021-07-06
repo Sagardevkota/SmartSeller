@@ -16,14 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-
             android:weightSum="1">
 
             <ImageView
                 android:id="@+id/ivImg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-
+                android:scaleType="centerCrop"
                 android:layout_weight="0.4"
                  />
 
@@ -39,13 +38,11 @@
                     android:id="@+id/tvProduct_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:text="Goldstar shoes"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/roboto_slab_bold"
-                      android:textStyle="bold"
+                    android:textSize="18sp"
+
  />
 
                 <TextView
@@ -53,11 +50,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-
-
-                    android:fontFamily="@font/roboto_slab_light"
-                    android:textColor="@color/Black"
-
                     android:text="Order id: 21414141" />
 
                 <TextView
@@ -65,21 +57,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/roboto_slab_light"
-                    android:textColor="@color/Black"
-
-
-
-                    android:text="Order Date:2020-9-16" />
+                    android:text="Order Date:" />
 
                 <TextView
                     android:id="@+id/tvQty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/roboto_slab_light"
-                    android:textColor="@color/Black"
-                    android:text="Qty: 2"
+                    android:text="Qty: "
 
                     />
 
@@ -93,10 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginBottom="5dp"
-                        android:text="Rs. 3200"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto_slab_bold"
-
+                        android:text="Rs. "
                         android:textColor="@color/colorPrimary"
 
                         />
@@ -128,7 +110,7 @@
             android:layout_gravity="end"
             android:backgroundTint="@color/transparentColor"
              android:layout_marginTop="10dp"
-            android:textStyle="bold"
+
 
             android:drawablePadding="10dp"
             android:text="See full details"
@@ -157,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Discount Applied: 10%"
+                android:text="Discount Applied:"
                 android:fontFamily="@font/roboto_slab_light"
                 android:textColor="@color/Black"
 

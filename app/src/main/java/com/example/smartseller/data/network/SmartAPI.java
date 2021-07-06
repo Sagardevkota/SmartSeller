@@ -1,27 +1,26 @@
 package com.example.smartseller.data.network;
 
 
-import com.example.smartseller.data.model.ColorAttribute;
 import com.example.smartseller.data.model.Conversation;
 import com.example.smartseller.data.model.ConversationResponse;
 import com.example.smartseller.data.model.MessageResponse;
 import com.example.smartseller.data.model.OrderResponse;
 import com.example.smartseller.data.model.Products;
-import com.example.smartseller.data.model.SizeAttribute;
 import com.example.smartseller.data.model.User;
 
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 
 import retrofit2.http.HTTP;
@@ -35,114 +34,100 @@ import retrofit2.http.Path;
 
 public class SmartAPI {
 
+    public static apiService apiService = null;
+    //    public static String base_url="http://52.171.61.18:8080/";
+//    public static String base_url = "http://10.0.2.2:8081/";
+    public static String base_url = "http://23.101.181.211:8080/";
 
-    public static apiService apiService=null;
-//    public static String base_url="http://52.171.61.18:8080/";
-    public static String base_url="http://10.0.2.2:8081/";
+    public static final String IMG_BASE_URL="https://bese2016smartstore.blob.core.windows.net/bese2016blob/";
 
-    public static apiService getApiService(){
-        if (apiService==null){
-            HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
-            OkHttpClient okHttpClient=new OkHttpClient()
+    public static apiService getApiService() {
+        if (apiService == null) {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient okHttpClient = new OkHttpClient()
                     .newBuilder()
                     .addInterceptor(loggingInterceptor)
                     .build();
 
-            Retrofit retrofit=new Retrofit.Builder()
+            Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build();
 
-            apiService=retrofit.create(apiService.class);
+            apiService = retrofit.create(apiService.class);
         }
         return apiService;
     }
 
-   public interface apiService{
+    public interface apiService {
 
 
         //user services
-       @POST(value = "/api/login")
-       Call<JwtResponse> login(@Body User user);
+        @POST(value = "/api/login")
+        Observable<JwtResponse> login(@Body User user);
 
-       @GET(value = "/api/user/{userName}")
-       Call<User> getUserDetails(@Header("Authorization")String jwt,@Path("userName")String userName);
+        @GET(value = "/api/user/details")
+        Observable<User> getUserDetails(@Header("Authorization") String jwt);
 
-       @GET(value = "/api/user/id/{userName}")
-       Call<JsonResponse> getUserId(@Header("Authorization") String jwt, @Path("userName") String userName);
+        @PUT(value = "/api/user/{newUserName}")
+        Call<JsonResponse> updateEmail(@Header("Authorization") String jwt, @Path("userId") Integer userId, @Path("newUserName") String newUserName);
 
-       @PUT(value = "/api/user/{userId}/{newUserName}")
-       Call<JsonResponse> updateEmail(@Header("Authorization") String jwt, @Path("userId")Integer userId, @Path("newUserName")String newUserName);
+        @PUT(value = "/api/user/phone/{newPhone}")
+        Call<JsonResponse> updatePhone(@Header("Authorization") String jwt, @Path("userId") Integer userId, @Path("newPhone") String newPhone);
 
-       @PUT(value = "/api/user/{userId}/phone/{newPhone}")
-       Call<JsonResponse> updatePhone(@Header("Authorization") String jwt,@Path("userId")Integer userId,@Path("newPhone")String newPhone);
-
-       @PUT(value = "/api/user/{userId}/delivery/{newDelivery}")
-       Call<JsonResponse> updateDelivery(@Header("Authorization") String jwt,@Path("userId")Integer userId,@Path("newDelivery")String newDelivery);
+        @PUT(value = "/api/user/delivery/{newDelivery}")
+        Call<JsonResponse> updateDelivery(@Header("Authorization") String jwt, @Path("userId") Integer userId, @Path("newDelivery") String newDelivery);
 
 
+        //product services
+        @Multipart
+        @POST(value = "/api/seller/products")
+        Observable<JsonResponse> addProduct(@Header("Authorization") String jwt, @Part("products") Products products,@Part MultipartBody.Part image);
 
-       //product services
-       @POST(value = "/api/product")
-       Call<JsonResponse> addProduct(@Header("Authorization") String jwt,@Body Products products);
+        @GET(value = "/api/seller/products/")
+        Observable<List<Products>> getProducts(@Header("Authorization") String jwt);
 
-       @GET(value = "/api/product/sellerId/{sellerId}")
-       Call<List<Products>> getProducts(@Header("Authorization")String jwt,@Path("sellerId") Integer sellerId);
-
-       @PUT(value = "/api/product")
-       Call<JsonResponse> updateProduct(@Header("Authorization")String jwt,@Body Products products);
-
-       @HTTP(method = "DELETE", path = "/api/product/{productId}")
-       Call<JsonResponse> deleteProduct(@Header("Authorization")String jwt,@Path("productId")Integer productId);
+        @Multipart
+        @PUT(value = "/api/seller/products")
+        Observable<JsonResponse> updateProduct(@Header("Authorization") String jwt, @Part("products") Products products,@Part MultipartBody.Part image);
 
 
+        @PUT(value = "/api/seller/products/no-image")
+        Observable<JsonResponse> updateProductWithoutImage(@Header("Authorization") String jwt, @Body Products products);
 
 
-       //product attributes
-       @POST(value = "/api/color")
-       Call<JsonResponse> addColor(@Header("Authorization") String jwt,@Body ColorAttribute colorAttribute);
-       @POST(value = "/api/size")
-       Call<JsonResponse> addSize(@Header("Authorization") String jwt,@Body SizeAttribute sizeAttribute);
-
-       @GET(value = "/api/color/{productId}")
-      Call<List<ColorAttribute> > getColors(@Header("Authorization")String jwt,@Path("productId") Integer productId);
-
-       @GET(value = "/api/size/{productId}")
-      Call<List<SizeAttribute>>  getSizes(@Header("Authorization")String jwt,@Path("productId") Integer productId);
+        @HTTP(method = "DELETE", path = "/api/seller/products/{productId}")
+        Call<JsonResponse> deleteProduct(@Header("Authorization") String jwt, @Path("productId") Integer productId);
 
 
 
-       @Multipart
-       @POST("/api/image/")
-       Call<JsonResponse> uploadImage(@Header("Authorization")String jwt,@Part MultipartBody.Part image);
+        //order services
+        @GET(value = "/api/seller/orders/status/{status}")
+        Observable<List<OrderResponse>> getOrders(@Header("Authorization") String jwt, @Path("status") String status);
 
+        @GET(value = "/api/seller/orders/count/{status}")
+        Call<JsonResponse> getOrderCount(@Header("Authorization") String jwt, @Path("sellerId") Integer sellerId, @Path("status") String status);
 
-       //order services
-       @GET(value = "/api/order/seller/id/{sellerId}/status/{status}")
-       Call<List<OrderResponse>> getOrders(@Header("Authorization")String jwt,@Path("sellerId")Integer sellerId,@Path("status") String status);
+        @PUT(value = "/api/seller/orders/{orderId}/date/{orderedDate}")
+        Call<JsonResponse> changeDeliveredDate(@Header("Authorization") String jwt, @Path("orderId") Integer orderId, @Path("orderedDate") String orderedDate);
 
-       @GET(value = "/api/order/seller/count/{sellerId}/{status}")
-        Call<JsonResponse> getOrderCount(@Header("Authorization")String jwt,@Path("sellerId") Integer sellerId,@Path("status") String status);
+        @PUT(value = "/api/seller/orders/{orderId}/status/{status}")
+        Call<JsonResponse> changeStatus(@Header("Authorization") String jwt, @Path("orderId") Integer orderId, @Path("status") String status);
 
-       @PUT(value = "/api/order/{orderId}/date/{orderedDate}")
-       Call<JsonResponse> changeDeliveredDate(@Header("Authorization")String jwt,@Path("orderId") Integer orderId,@Path("orderedDate") String orderedDate);
+        //total conversation of seller products
+        @GET(value = "/api/seller/conversations")
+        Call<List<MessageResponse>> getConversations(@Header("Authorization") String jwt);
 
-       @PUT(value = "/api/order/{orderId}/status/{status}")
-       Call<JsonResponse> changeStatus(@Header("Authorization")String jwt,@Path("orderId") Integer orderId,@Path("status") String status);
+        //conversation of product
+        @GET(value = "/api/seller/conversations/{productId}")
+        Call<List<ConversationResponse>> getConversation(@Header("Authorization") String jwt, @Path("productId") Integer productId);
 
-       //total conversation of seller products
-       @GET(value = "/api/conversation/seller/id/{sellerId}")
-       Call<List<MessageResponse>> getConversations(@Header("Authorization")String jwt,@Path("sellerId") Integer sellerId);
+        @POST(value = "/api/conversations")
+        Call<JsonResponse> addConversation(@Header("Authorization") String jwt, @Body Conversation conversation);
 
-       //conversation of product
-       @GET(value = "/api/conversation/{productId}")
-       Call<List<ConversationResponse>> getConversation(@Header("Authorization")String jwt, @Path("productId")Integer productId);
-
-       @POST(value = "/api/conversation")
-       Call<JsonResponse> addConversation(@Header("Authorization")String jwt,@Body Conversation conversation);
-
-   }
+    }
 
 }

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartseller.R;
 import com.example.smartseller.data.model.Products;
+import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.LayoutProductListsBinding;
 import com.example.smartseller.ui.home.MyProductFragment.MyProductDetails;
 import com.squareup.picasso.Callback;
@@ -61,7 +62,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Myviewholder> 
         holder.tvProductName.setText(product_name);
 
         try{
-            String url=currentItem.getPicture_path();
+            String url= SmartAPI.IMG_BASE_URL+currentItem.getPicturePath();
             Picasso.get()
                     .load(url)
                     .fit()

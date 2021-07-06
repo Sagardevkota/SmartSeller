@@ -7,9 +7,8 @@
     android:orientation="vertical"
 
 
-    tools:context=".ui.home.orders">
+    tools:context=".ui.home.orders.fragments.mainFragment.Orders">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -20,14 +19,11 @@
         app:tabTextAppearance="@style/TabLayoutStyle"
         android:layout_gravity="clip_horizontal"
         app:tabMode="fixed"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/White"
+        app:tabIndicatorColor="@color/Black"
         android:fontFamily="@font/text_me_one"
         android:textStyle="bold"
 
-
-
-        app:tabSelectedTextColor="#fff"
+        app:tabSelectedTextColor="@color/colorPrimaryDark"
 
 
         >

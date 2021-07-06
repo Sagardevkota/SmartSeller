@@ -47,20 +47,12 @@ public class MessageDetails extends Fragment {
 
 
         getConversation(productId);
-        binding.buSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message=binding.etMessage.getText().toString().trim();
-                addConversation(message,productId);
-            }
+        binding.buSend.setOnClickListener(view1 -> {
+            String message=binding.etMessage.getText().toString().trim();
+            addConversation(message,productId);
         });
 
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MessageFragment()).commit();
-            }
-        });
+        binding.ivBack.setOnClickListener(view12 -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MessageFragment()).commit());
         initRecyclerView();
         return view;
     }

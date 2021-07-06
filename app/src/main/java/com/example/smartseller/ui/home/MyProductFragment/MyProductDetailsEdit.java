@@ -2,17 +2,14 @@ package com.example.smartseller.ui.home.MyProductFragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,26 +17,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.example.smartseller.R;
-import com.example.smartseller.data.model.ColorAttribute;
 import com.example.smartseller.data.model.Products;
-import com.example.smartseller.data.model.SizeAttribute;
 import com.example.smartseller.data.network.JsonResponse;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentMyProductDetailsEditBinding;
-import com.example.smartseller.ui.home.HomeActivity;
 import com.example.smartseller.util.session.Session;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import es.dmoral.toasty.Toasty;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -48,102 +58,119 @@ import retrofit2.Response;
 
 
 public class MyProductDetailsEdit extends Fragment {
+    private static final String TAG = "MY_PRODUCT_DETAILS_EDIT";
     private FragmentMyProductDetailsEditBinding binding;
-    private final int GALLERY_REQUEST=10002;
-    private String imgPath="";
-    private String picturePath="";
+    private final int GALLERY_REQUEST = 10002;
+    private String imgPath = ""; //local image path to create request body and multipart file
+    private String picturePath = "";
     private Session session;
     Integer productId;
     private String categoryl;
     private String type;
+    private final Set<String> selectedColorAttributeList = new HashSet<>();
+    private final Set<String> selectedSizeAttributeList = new HashSet<>();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding=FragmentMyProductDetailsEditBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
-        session=new Session(getContext());
+        binding = FragmentMyProductDetailsEditBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        session = new Session(getContext());
         getPassedValues();
         setSpinners();
-        binding.ivEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
-            }
+        binding.ivEdit.setOnClickListener(view1 -> {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
         });
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getAndPutValues();
-            }
-        });
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyProductDetails mpd=new MyProductDetails();
-                Bundle args=new Bundle();
-                args.putParcelable("productObj",getArguments().getParcelable("productObj"));
-                mpd.setArguments(args);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,mpd).commit();
+        binding.btnSave.setOnClickListener(view12 -> getAndPutValues());
+        binding.ivBack.setOnClickListener(view13 -> {
+          
+            getActivity().getSupportFragmentManager().popBackStack();
 
-                      }
         });
         return view;
     }
 
     private void getAndPutValues() {
-        String picture_path="";
-        if (imgPath.length()>2)
-        {
-            File f = new File(imgPath);
-            picture_path = f.getName();
-        uploadImage();
-            String base_url = "127.0.0.1/smartPasalAssets/photos/"; //for storing in db
-            picture_path= base_url +picture_path;
+
+        showProgressDialog("Updating Product");
+        String product_name = binding.etProductName.getText().toString().trim();
+        String description = binding.etDesc.getText().toString().trim();
+        String discountStr = binding.etDiscount.getText().toString().trim();
+        Integer discount = Integer.valueOf(discountStr);
+        String category = categoryl;
+        String brand = binding.etBrand.getText().toString().trim();
+
+        String price = binding.etPrice.getText().toString().trim();
+        String stockstr = binding.etStock.getText().toString().trim();
+        Integer stock = Integer.valueOf(stockstr);
+        String sku = binding.etSku.getText().toString().trim();
+        Integer sellerId = session.getUserId();
+
+        Products products = Products.builder()
+                .productId(productId)
+                .productName(product_name)
+                .desc(description)
+                .price(price)
+                .category(category)
+                .brand(brand)
+                .sku(sku)
+                .type(type)
+                .picturePath(picturePath)
+                .discount(discount)
+                .stock(stock)
+                .seller_id(sellerId)
+                .colors(new ArrayList<>(selectedColorAttributeList))
+                .sizes(new ArrayList<>(selectedSizeAttributeList))
+                .build();
+
+        //if user chooses from gallery path of file in internal sd is not null
+        if (imgPath.length()!=0){
+            File file = new File(imgPath);
+             RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+// MultipartBody.Part is used to send also the actual file name
+           MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+             SmartAPI.getApiService().updateProduct(session.getJWT(), products,body)
+                     .subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe(response -> {
+                         if (response.getStatus().equalsIgnoreCase("200 OK")){
+                             Toasty.success(getContext(), response.getMessage()).show();
+                             hideProgressDialog();
+                         }
+                         else {Toasty.error(getContext(), response.getMessage()).show();
+                         hideProgressDialog();
+                         }
+                     },throwable -> Log.e(TAG, "getAndPutValues: "+throwable.getMessage() ));
+
+
         }
+
         else
-            picture_path=picturePath;
-        String product_name=binding.etProductName.getText().toString().trim();
-        String description=binding.etDesc.getText().toString().trim();
-        String discountStr=binding.etDiscount.getText().toString().trim();
-        Integer discount=Integer.valueOf(discountStr);
-        String category=categoryl;
-        String brand=binding.etBrand.getText().toString().trim();
-
-        String price=binding.etPrice.getText().toString().trim();
-        String stockstr=binding.etStock.getText().toString().trim();
-        Integer stock=Integer.valueOf(stockstr);
-        String sku=binding.etSku.getText().toString().trim();
-        Integer sellerId=session.getUserId();
-
-        Products products=new Products(productId,product_name, description, price, category, brand,  sku, type, picture_path, discount,  stock,sellerId);
-        Call<JsonResponse> updateProduct= SmartAPI.getApiService().updateProduct(session.getJWT(),products);
-        updateProduct.enqueue(new retrofit2.Callback<JsonResponse>() {
-            @Override
-            public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                if (response.isSuccessful())
-                {
-                    if (response.body().getStatus().equalsIgnoreCase("200 OK"))
-                    {
-                        Toasty.success(getContext(),response.body().getMessage()).show();
-
-
-                        addAttributes(productId);
-                    }
-                    else
-                        Toasty.error(getContext(),response.body().getMessage()).show();
+            SmartAPI.getApiService().updateProductWithoutImage(session.getJWT(),products)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(response -> {
+                if (response.getStatus().equalsIgnoreCase("200 OK")){
+                    Toasty.success(getContext(), response.getMessage()).show();
+                    hideProgressDialog();
                 }
-            }
+                else {Toasty.error(getContext(), response.getMessage()).show();
+                hideProgressDialog();
+                }
+            },throwable -> Log.e(TAG, "getAndPutValues: "+throwable.getMessage() ));
 
-            @Override
-            public void onFailure(Call<JsonResponse> call, Throwable t) {
 
-            }
-        });
+
+        Log.i(TAG, "getAndPutValues: "+products);
+
     }
 
     @Override
@@ -153,9 +180,9 @@ public class MyProductDetailsEdit extends Fragment {
     }
 
     private void getPassedValues() {
-        Bundle b=getArguments();
-        Products products=b.getParcelable("productObj");
-        Toasty.success(getContext(),products.getProductName()).show();
+        Bundle b = getArguments();
+        Products products = b.getParcelable("product");
+        Toasty.success(getContext(), products.getProductName()).show();
         binding.etProductName.setText(products.getProductName());
         binding.etDesc.setText(products.getDesc());
         binding.etPrice.setText(String.valueOf(products.getPrice()));
@@ -166,14 +193,33 @@ public class MyProductDetailsEdit extends Fragment {
         binding.etStock.setText(String.valueOf(products.getStock()));
 
 
+        productId = products.getProductId();
+        picturePath = products.getPicturePath();
 
-        productId=products.getProductId();
-        picturePath=products.getPicture_path();
-        binding.etColor.setText(products.getColor());
-        binding.etSize.setText(products.getSize());
+        //if there is no color at all
+        if (products.getColors().size()!=0){
+            selectedColorAttributeList.addAll(products.getColors());
 
-        try{
-            String url=products.getPicture_path();
+            //get all color from set and create each chip
+            selectedColorAttributeList.forEach(color ->
+                    binding.colorChipGroup.addView(createChip(color,
+                            binding.colorChipGroup)));
+        }
+
+        //if there is no color at all
+        if (products.getSizes().size()!=0){
+            selectedSizeAttributeList.addAll(products.getSizes());
+
+            //get all color from set and create each chip
+            selectedSizeAttributeList.forEach(size ->
+                    binding.sizeChipGroup.addView(createChip(size,
+                            binding.sizeChipGroup)));
+        }
+
+
+
+        try {
+            String url = SmartAPI.IMG_BASE_URL+products.getPicturePath();
             Picasso.get()
                     .load(url)
                     .fit()
@@ -185,34 +231,121 @@ public class MyProductDetailsEdit extends Fragment {
 
                         @Override
                         public void onError(Exception e) {
-                            Log.d("Load",e.getMessage());
+                            Log.d("Load", e.getMessage());
                         }
-                    });}
-        catch (Exception e){
-            Log.d("error",e.getMessage());
+                    });
+        } catch (Exception e) {
+            Log.d("error", e.getMessage());
         }
+
+        binding.tvEnterColor.setOnClickListener(view -> {
+            //create edit text to get input from user for color
+            final EditText edittext = new EditText(getContext());
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            lp.setMarginStart(8);
+            edittext.setLayoutParams(lp);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+            builder.setView(edittext);
+            builder.setTitle("Enter color")
+                    .setMessage("Please enter color for your product")
+                    .setPositiveButton("Enter", (dialogInterface, i) -> {
+
+                        String addedColor = edittext.getText().toString();
+                        if (selectedColorAttributeList.stream()
+                                .anyMatch(color ->
+                                        color.equalsIgnoreCase(addedColor)))
+                        {
+                            Toasty.error(getContext(),addedColor+" already exists",Toasty.LENGTH_SHORT).show();
+                            return;
+                        }
+                        selectedColorAttributeList.add(addedColor);
+                        binding.colorChipGroup.addView(createChip(addedColor,binding.colorChipGroup));
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .show();
+        });
+
+
+        binding.tvEnterSize.setOnClickListener(view -> {
+            final EditText edittext = new EditText(getContext());
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            lp.setMarginStart(8);
+            edittext.setLayoutParams(lp);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext());
+            builder.setView(edittext);
+            builder.setTitle("Enter size")
+                    .setMessage("Please enter size for your product")
+                    .setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            String addedSize = edittext.getText().toString();
+                            if (selectedSizeAttributeList.stream()
+                                    .anyMatch(size ->
+                                            size.equalsIgnoreCase(addedSize)))
+                            {
+                                Toasty.error(getContext(),addedSize+" already exists",Toasty.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            selectedSizeAttributeList.add(addedSize);
+                            binding.sizeChipGroup.addView(createChip(addedSize,binding.sizeChipGroup));
+                        }
+                    })
+                    .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                    .show();
+        });
+
+
+        binding.colorChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Chip chip = group.findViewById(checkedId);
+            if (chip != null) {
+                String color = chip.getText().toString();
+
+                Toasty.normal(getContext(),"Removed "+color,Toasty.LENGTH_SHORT).show();
+                binding.colorChipGroup.removeView(chip);
+                selectedColorAttributeList.removeIf(colorInSet-> colorInSet.equalsIgnoreCase(color));
+            }
+
+        });
+        binding.sizeChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Chip chip = group.findViewById(checkedId);
+            if (chip != null) {
+                String size = chip.getText().toString();
+                Toasty.normal(getContext(),"Removed "+size,Toasty.LENGTH_SHORT).show();
+                binding.sizeChipGroup.removeView(chip);
+                selectedSizeAttributeList.removeIf(sizeInSet -> sizeInSet.equalsIgnoreCase(size));
+            }
+
+        });
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK)
-            switch (requestCode){
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode) {
                 case GALLERY_REQUEST:
                     Uri selectedImage = data.getData();
                     try {
                         Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         binding.ivProductImage.setImageBitmap(imageBitmap);
-                        String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                        Cursor cursor = getActivity().getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                         cursor.moveToFirst();
                         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                         String picturePath = cursor.getString(columnIndex);
-                        imgPath=picturePath;
-
-
-
+                        imgPath = picturePath;
 
 
                     } catch (IOException e) {
@@ -225,7 +358,7 @@ public class MyProductDetailsEdit extends Fragment {
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     private void requestPermission() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat
                     .requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_PERMISSIONS);
         }
@@ -250,72 +383,34 @@ public class MyProductDetailsEdit extends Fragment {
         }
     }
 
-    private void addAttributes(Integer productId) {
-        String color=binding.etColor.getText().toString().trim();
-        String sizeStr=binding.etSize.getText().toString().trim();
-        if (sizeStr.isEmpty()&&color.isEmpty())
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MyProduct()).commit();
-                ColorAttribute colorAttribute=new ColorAttribute(productId,color);
-                Call<JsonResponse> addColor=SmartAPI.getApiService().addColor(session.getJWT(),colorAttribute);
-                addColor.enqueue(new retrofit2.Callback<JsonResponse>() {
-                    @Override
-                    public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                        if (response.isSuccessful())
-                        {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonResponse> call, Throwable t) {
-
-                    }
-                });
-                SizeAttribute sizeAttribute=new SizeAttribute(productId,sizeStr);
-                Call<JsonResponse> sizeCall=SmartAPI.getApiService().addSize(session.getJWT(),sizeAttribute);
-                sizeCall.enqueue(new retrofit2.Callback<JsonResponse>() {
-                    @Override
-                    public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                        if (response.isSuccessful())
-                            Log.d("sizeCall", "onResponse:"+response.body().getMessage());
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonResponse> call, Throwable t) {
-
-                    }
-                });
-
-            }
-
-
 
 
 
     private void setSpinners() {
         //category spinner
-        List<String> categorylist= Arrays.asList(getResources().getStringArray(R.array.category));
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,categorylist);
+        List<String> categorylist = Arrays.asList(getResources().getStringArray(R.array.category));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, categorylist);
         binding.spCategory.setAdapter(arrayAdapter);
         int positionOfSelectedCategory = 0;
-        Products products = getArguments().getParcelable("productObj");
+        Products products = getArguments().getParcelable("product");
         String selectedCategory = products.getCategory();
-        for (String category:categorylist){
+        for (String category : categorylist) {
             if (category.equalsIgnoreCase(selectedCategory))
                 break;
             positionOfSelectedCategory++;
         }
 
 
-        binding.spCategory.setSelection(positionOfSelectedCategory,true);
+        //to make spinner select previously set category
+        binding.spCategory.setSelection(positionOfSelectedCategory, true);
+
+        categoryl = selectedCategory;
 
 
         binding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                categoryl=categorylist.get(position);
+                categoryl = categorylist.get(position);
             }
 
             @Override
@@ -326,23 +421,26 @@ public class MyProductDetailsEdit extends Fragment {
 
 
         //type spinner
-        List<String> typelist= Arrays.asList(getResources().getStringArray(R.array.Type));
-        ArrayAdapter<String> arraytypeAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,typelist);
+        List<String> typelist = Arrays.asList(getResources().getStringArray(R.array.Type));
+        ArrayAdapter<String> arraytypeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, typelist);
         binding.spType.setAdapter(arraytypeAdapter);
         int positionOfSelectedType = 0;
         String selectedType = products.getType();
-        for (String type:typelist){
+        for (String type : typelist) {
             if (type.equalsIgnoreCase(selectedType))
                 break;
             positionOfSelectedType++;
         }
 
-        binding.spType.setSelection(positionOfSelectedType,true);
+        binding.spType.setSelection(positionOfSelectedType, true);
+
+        //select already set type
+        type = selectedType;
 
         binding.spType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                type=typelist.get(position);
+                type = typelist.get(position);
             }
 
             @Override
@@ -352,45 +450,35 @@ public class MyProductDetailsEdit extends Fragment {
         });
 
 
-
     }
 
-    private void uploadImage(){
-
-        File file = new File(imgPath);
-
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-// MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
 
-        Call<JsonResponse> uploadCall=SmartAPI.getApiService().uploadImage(session.getJWT(),body);
-        uploadCall.enqueue(new retrofit2.Callback<JsonResponse>() {
-            @Override
-            public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                if (response.isSuccessful())
-                {
-                    if (response.body().getStatus().equalsIgnoreCase("200 OK"))
-                        Log.d("edit image upload", "onResponse: image upload successfull");
-                }
+    private Chip createChip(String text, ChipGroup viewGroup){
+        Chip chip =
+                (Chip) getLayoutInflater()
+                        .inflate(R.layout.single_chip_layout, viewGroup, false);
+        chip.setText(text);
+        return chip;
+    }
 
+    @VisibleForTesting
+    public ProgressDialog mProgressDialog;
 
+    public void showProgressDialog(String msg) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setMessage(msg);
+            mProgressDialog.setIndeterminate(true);
+        }
 
+        mProgressDialog.show();
+    }
 
-            }
-
-            @Override
-            public void onFailure(Call<JsonResponse> call, Throwable t) {
-                Toasty.error(getContext(),t.getMessage()).show();
-
-            }
-        });
-
-
-
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
 

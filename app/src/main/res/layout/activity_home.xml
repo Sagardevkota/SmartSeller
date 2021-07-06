@@ -7,105 +7,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-
-
-
     tools:context=".ui.home.HomeActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary"
-        app:elevation="0dp"
 
-
-        >
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-
-
-
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/custom_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="bottom"
-                    >
-
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/tvAppbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dashboard"
-                    android:textColor="@color/White"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-thin"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-
-                    />
-
-
-                  <ImageView
-                      android:id="@+id/ivLogout"
-                      android:layout_width="24dp"
-                      android:layout_height="24dp"
-                      android:src="@drawable/ic_logout"
-                      android:layout_alignParentRight="true"
-                      android:layout_marginEnd="20dp"
-                      android:tint="@color/White"
-                      />
-                </RelativeLayout>
-
-            </com.google.android.material.appbar.MaterialToolbar>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
 
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_gravity="top"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-
 
         android:background="#Fff"
         android:scrollbars="none"
 
-
         />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_love"
-        android:layout_width="wrap_content"
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottom_app_bar"
-        app:showMotionSpec="@anim/fragment_open_enter"
-        app:elevation="10dp"
-        android:tint="@null"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation_menu"/>
 
-        android:backgroundTint="@color/White"
-        android:src="@drawable/ic_add_24"
 
-        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_message"
@@ -126,110 +53,6 @@
 
 
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        app:contentInsetStart="0dp"
-
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-
-
-            >
-            <TextView
-                android:id="@+id/tvHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_home_24px"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:fontFamily="sans-serif-thin"
-                android:textStyle="bold"
-
-                android:gravity="center_horizontal"
-
-
-                android:text="home"
-                />
-
-            <TextView
-                android:id="@+id/tvOrders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-
-
-                android:drawableTop="@drawable/ic_orders"
-                android:textColor="#000"
-                android:textAlignment="center"
-                android:fontFamily="sans-serif-thin"
-                android:textStyle="bold"
-
-                android:text="orders"
-                />
-
-
-
-            <TextView
-                android:id="@+id/tvAddProduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:textColor="#000"
-                android:fontFamily="sans-serif-thin"
-                android:textStyle="bold"
-
-                android:text="add Product"
-                />
-
-            <TextView
-                android:id="@+id/tvMyProducts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_product"
-                android:textColor="#000"
-                android:textAlignment="textEnd"
-                android:fontFamily="sans-serif-thin"
-                android:textStyle="bold"
-
-                android:text="products"
-                />
-
-
-            <TextView
-                android:id="@+id/tvAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/ic_account_circle_24px"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:fontFamily="sans-serif-thin"
-                android:textStyle="bold"
-
-                android:gravity="center_horizontal"
-
-
-
-                android:text="account"
-                />
-
-
-
-        </LinearLayout>
-
-    </com.google.android.material.bottomappbar.BottomAppBar>
 
 
 

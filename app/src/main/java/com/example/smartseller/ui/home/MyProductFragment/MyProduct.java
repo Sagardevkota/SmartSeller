@@ -3,8 +3,10 @@ package com.example.smartseller.ui.home.MyProductFragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,26 +16,29 @@ import com.example.smartseller.data.model.Products;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentMyProductBinding;
 import com.example.smartseller.ui.home.adapter.ListAdapter;
+import com.example.smartseller.ui.home.homeFragment.home;
 import com.example.smartseller.util.session.Session;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyProduct extends Fragment {
+    private static final String TAG = "MY_PRODUCT";
     private FragmentMyProductBinding binding;
     private Session session;
-    private ArrayList<Products> productsArrayList=new ArrayList<>();
+    private final ArrayList<Products> productsArrayList = new ArrayList<>();
     private ListAdapter adapter;
 
 
     public MyProduct() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -46,52 +51,39 @@ public class MyProduct extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding=FragmentMyProductBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
-        session=new Session(getActivity());
+        binding = FragmentMyProductBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        session = new Session(getActivity());
+
         initRecyclerView();
         getMyProducts();
         return view;
     }
 
     private void initRecyclerView() {
-        StaggeredGridLayoutManager staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        adapter=new ListAdapter(productsArrayList,getContext());
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        adapter = new ListAdapter(productsArrayList, getContext());
         binding.rvMyProducts.setAdapter(adapter);
         binding.rvMyProducts.setLayoutManager(staggeredGridLayoutManager);
-        adapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                MyProductDetails mpd=new MyProductDetails();
-                Bundle args=new Bundle();
-                args.putParcelable("productObj",productsArrayList.get(position));
-                mpd.setArguments(args);
-           getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,mpd).commit();
-            }
+        adapter.setOnItemClickListener(position -> {
+            MyProductDirections.ActionProductToItsDetails productToItsDetails =
+                    MyProductDirections.actionProductToItsDetails(productsArrayList.get(position));
+
+            Navigation.findNavController(getView()).navigate(productToItsDetails);
         });
 
 
     }
 
     private void getMyProducts() {
-        Call<List<Products>> getproduct= SmartAPI.getApiService().getProducts(session.getJWT(),session.getUserId());
-        getproduct.enqueue(new Callback<List<Products>>() {
-            @Override
-            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
-                if (response.isSuccessful())
-                {
-                    productsArrayList.clear();
-                    for (Products p:response.body()){
-                        productsArrayList.add(new Products(p));
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            }
+        productsArrayList.clear();
+        SmartAPI.getApiService().getProducts(session.getJWT())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(products -> {
+                    productsArrayList.addAll(products);
+                    adapter.notifyItemRangeInserted(0, products.size());
+                }, throwable -> Log.e(TAG, "getMyProducts: " + throwable.getMessage()));
 
-            @Override
-            public void onFailure(Call<List<Products>> call, Throwable t) {
-
-            }
-        });
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    android:padding="16dp"
+
     tools:context=".ui.home.AddProductFragment.addProduct">
 
     <androidx.core.widget.NestedScrollView
@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
 android:orientation="vertical"
         android:layout_marginBottom="50dp"
+        android:padding="16dp"
         >
 
 
@@ -28,7 +29,6 @@ android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BASIC INFORMATION"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"/>
@@ -50,6 +50,33 @@ android:orientation="vertical"
 
 
             >
+
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:src="@drawable/placeholder"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+
+                />
+
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:drawableTint="@color/White"
+                android:text="Select Image "
+                android:textSize="12sp"
+                android:layout_marginBottom="10dp"
+
+
+                />
+
+
             <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -133,28 +160,7 @@ android:orientation="vertical"
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/productImage"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:src="@drawable/placeholder"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
 
-                />
-
-            <Button
-                android:id="@+id/btnSelectImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:drawableTint="@color/White"
-                android:text="Select Image "
-                android:textSize="12sp"
-
-
-                />
 
             <TextView
                 android:id="@+id/tvNext"

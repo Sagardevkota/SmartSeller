@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/ordersFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order">
+
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:label="My Orders Fragment"
+        android:name="com.example.smartseller.ui.home.orders.fragments.mainFragment.Orders"
+        tools:layout="@layout/fragment_orders"
+        >
+
+
+        <action
+            android:id="@+id/action_to_order_details"
+            app:destination="@+id/orderDetailsFragment"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:label="My Orders Fragment"
+        android:name="com.example.smartseller.ui.home.orders.fragments.innerFragments.OrderDetails"
+        tools:layout="@layout/fragment_orders"
+        >
+
+        <argument
+            android:name="order"
+            app:argType="com.example.smartseller.data.model.OrderResponse"
+            />
+
+        <action
+            android:id="@+id/action_to_order_from_details"
+            app:popUpTo="@layout/fragment_orders"/>
+
+
+
+    </fragment>
+
+
+
+
+
+</navigation>

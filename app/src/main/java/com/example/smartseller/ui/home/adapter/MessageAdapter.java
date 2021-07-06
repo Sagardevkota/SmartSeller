@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartseller.R;
 import com.example.smartseller.data.model.MessageResponse;
 import com.example.smartseller.data.model.Products;
+import com.example.smartseller.data.network.SmartAPI;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -25,17 +26,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Myviewho
     public ArrayList<MessageResponse> messageResponses;
     Context context;
     private OnItemClickListener mListener;
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
 
     public MessageAdapter(ArrayList<MessageResponse> messageResponses, Context context) {
-        this.messageResponses=messageResponses;
-        this.context=context;
+        this.messageResponses = messageResponses;
+        this.context = context;
     }
 
     @NonNull
@@ -49,15 +52,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Myviewho
 
     @Override
     public void onBindViewHolder(@NonNull Myviewholder holder, int position) {
-        final MessageResponse message =messageResponses.get(position);
-        String product_name=message.getProduct_name();
+        final MessageResponse message = messageResponses.get(position);
+        String product_name = message.getProduct_name();
         holder.tvProductName.setText(product_name);
-        holder.tvMessage.setText(message.getMessage().substring(0,message.getMessage().length()/3)+"...");
+        holder.tvMessage.setText(message.getMessage().substring(0, message.getMessage().length() / 3) + "...");
         holder.tvDate.setText(message.getDate());
 
 
-        try{
-            String url=message.getPicture_path();
+        try {
+            String url = SmartAPI.IMG_BASE_URL + message.getPicture_path();
 
             Picasso.get()
                     .load(url)
@@ -65,17 +68,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Myviewho
                     .into(holder.ivImage, new Callback() {
                         @Override
                         public void onSuccess() {
-                            Log.d("Load","Successfull");
+                            Log.d("Load", "Successfull");
 
                         }
 
                         @Override
                         public void onError(Exception e) {
-                            Log.d("Load",e.getMessage());
+                            Log.d("Load", e.getMessage());
                         }
-                    });}
-        catch (Exception e){
-            Log.d("error",e.getMessage());
+                    });
+        } catch (Exception e) {
+            Log.d("error", e.getMessage());
         }
 
     }
@@ -84,19 +87,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Myviewho
     public int getItemCount() {
         return messageResponses.size();
     }
+
     public static class Myviewholder extends RecyclerView.ViewHolder {
 
-        TextView tvProductName,tvMessage,tvDate;
+        TextView tvProductName, tvMessage, tvDate;
         ImageView ivImage;
-
 
 
         public Myviewholder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            tvProductName=itemView.findViewById(R.id.tvProduct_Name);
-            ivImage=itemView.findViewById(R.id.product_image);
-            tvMessage=itemView.findViewById(R.id.tvMessage);
-            tvDate=itemView.findViewById(R.id.tvDate);
+            tvProductName = itemView.findViewById(R.id.tvProduct_Name);
+            ivImage = itemView.findViewById(R.id.product_image);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+            tvDate = itemView.findViewById(R.id.tvDate);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,11 +114,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Myviewho
             });
 
 
-
-
         }
     }
-
 
 
 }

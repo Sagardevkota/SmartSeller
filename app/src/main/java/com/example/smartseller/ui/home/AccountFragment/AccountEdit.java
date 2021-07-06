@@ -48,27 +48,18 @@ public class AccountEdit extends Fragment {
         View view=binding.getRoot();
         session=new Session(getContext());
         getPassedValues();
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Account()).commit();
-            }
-        });
 
-        binding.buSaveEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = binding.etEmail.getText().toString();
-                if (email.isEmpty())
-                    Toasty.error(getContext(), "Field cant be empty").show();
+        binding.buSaveEmail.setOnClickListener(view12 -> {
+            String email = binding.etEmail.getText().toString();
+            if (email.isEmpty())
+                Toasty.error(getContext(), "Field cant be empty").show();
 
-                else if (email.equals(session.getusername()))
-                    Toasty.error(getContext(), "No changes made").show();
-                else
-                    updateEmail(email);
+            else if (email.equals(session.getusername()))
+                Toasty.error(getContext(), "No changes made").show();
+            else
+                updateEmail(email);
 
 
-            }
         });
         binding.buSavePhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +91,7 @@ public class AccountEdit extends Fragment {
     private void getPassedValues() {
         Bundle b=getArguments();
         if (b!=null){
-            User user=b.getParcelable("userObj");
+            User user=b.getParcelable("user");
             binding.etEmail.setText(user.getUserName());
             binding.etPhone.setText(user.getPhone());
             binding.etDelivery.setText(user.getDeliveryAddress());

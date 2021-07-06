@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/addProductFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addproduct">
+
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:label="My Product Fragment"
+        android:name="com.example.smartseller.ui.home.AddProductFragment.addProduct"
+        tools:layout="@layout/fragment_add_product"
+        >
+
+        <action
+            app:destination="@+id/addProductSecondFragment"
+            android:id="@+id/action_product_second_page"
+            />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addProductSecondFragment"
+        android:label="Add Product Second Fragment"
+        android:name="com.example.smartseller.ui.home.AddProductFragment.addProductSecondPage"
+        tools:layout="@layout/fragment_add_product_second_page"
+        >
+
+        <action
+            android:id="@+id/action_add_product_second_page_to_first"
+            app:popUpTo="@id/addProductFragment"
+            />
+
+
+        <argument
+            android:name="product"
+            app:argType="com.example.smartseller.data.model.Products"
+            />
+
+
+    </fragment>
+
+
+
+</navigation>

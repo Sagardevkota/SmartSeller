@@ -3,8 +3,10 @@ package com.example.smartseller.ui.home.orders.fragments.innerFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.example.smartseller.util.session.Session;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,9 +30,10 @@ import retrofit2.Response;
 
 public class CompletedOrders extends Fragment {
 
+    private static final String TAG = "COMPLETED_ORDERS";
     private FragmentCompletedOrdersBinding binding;
     private Session session;
-    private ArrayList<OrderResponse> orderResponses=new ArrayList<>();
+    private final ArrayList<OrderResponse> orderResponseList=new ArrayList<>();
     private OrderAdapter orderAdapter;
 
 
@@ -53,46 +58,42 @@ public class CompletedOrders extends Fragment {
         View view=binding.getRoot();
         session=new Session(getActivity());
         getOrders();
-        initRecyclerView();
+        initRecyclerView(view);
         return view;
          }
 
     private void getOrders() {
-        Call<List<OrderResponse>> getOrders= SmartAPI.getApiService().getOrders(session.getJWT(),session.getUserId(),"completed");
-        getOrders.enqueue(new Callback<List<OrderResponse>>() {
-            @Override
-            public void onResponse(Call<List<OrderResponse>> call, Response<List<OrderResponse>> response) {
-                if (response.isSuccessful())
-                {
+       SmartAPI.getApiService().getOrders(session.getJWT(),"completed")
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(orderResponses -> {
+                   orderAdapter.notifyItemRangeRemoved(0,orderAdapter.getItemCount());
+                   orderResponseList.clear();
+                   orderResponseList.addAll(orderResponses);
+                   orderAdapter.notifyItemRangeInserted(0,orderResponses.size());
 
-                    orderResponses.clear();
-                    response.body()
-                            .forEach(orderResponse -> orderResponses.add(new OrderResponse(orderResponse)));
-                    orderAdapter.notifyDataSetChanged();
-                }
-            }
+               },throwable -> Log.e(TAG, "getOrders: "+throwable.getMessage() ));
 
-            @Override
-            public void onFailure(Call<List<OrderResponse>> call, Throwable t) {
 
-            }
-        });
     }
 
-    private void initRecyclerView() {
-        orderAdapter=new OrderAdapter(orderResponses,getContext());
+    private void initRecyclerView(View view) {
+        orderAdapter=new OrderAdapter(orderResponseList,getContext());
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         binding.rvCompletedOrder.setLayoutManager(layoutManager);
         binding.rvCompletedOrder.setAdapter(orderAdapter);
         orderAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                OrderResponse orderResponse=orderResponses.get(position);
+                OrderResponse orderResponse = orderResponseList.get(position);
                 Bundle args=new Bundle();
                 args.putParcelable("orderObj",orderResponse);
                 OrderDetails orderDetails=new OrderDetails();
                 orderDetails.setArguments(args);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,orderDetails).commit();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack("COMPLETED_ORDERS")
+                        .replace(R.id.fragment_container,orderDetails).commit();
 
             }
         });

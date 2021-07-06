@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/accountFragment"
+
+    android:id="@+id/account">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:label="Account Fragment"
+        tools:layout="@layout/fragment_account"
+        android:name="com.example.smartseller.ui.home.AccountFragment.Account"
+        >
+        <action
+            android:id="@+id/action_account_to_account_edit_fragment"
+            app:destination="@+id/account_edit_fragment"
+
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/account_edit_fragment"
+        android:label="Account Edit Fragment"
+        tools:layout="@layout/fragment_account_edit"
+        android:name="com.example.smartseller.ui.home.AccountFragment.AccountEdit"
+        >
+
+        <argument
+            android:name="user"
+            app:argType="com.example.smartseller.data.model.User"
+             />
+
+    </fragment>
+
+</navigation>

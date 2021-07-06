@@ -8,6 +8,17 @@
     android:background="@color/primaryShade"
 
     >
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+        android:id="@+id/ivLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_gravity="end"
+        />
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Welcome Sagar"
+        android:text="Welcome,"
         android:textAlignment="textStart"
         android:textColor="@color/Black"
         android:fontFamily="sans-serif-thin"

@@ -49,16 +49,6 @@
                     android:textSize="30sp"
                     android:textStyle="bold|normal" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/text_me_one"
-                    android:text="Email/Username"
-                    android:textColor="#FF5722"
-                    android:textSize="20dp" />
-
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -76,16 +66,10 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:drawableStart="@drawable/ic_email_24px"
                         android:drawablePadding="10dp"
-                        android:gravity="center"
                         android:drawableTint="@color/Black"
-
-
                         android:textColor="#000"
-
-                        android:textAlignment="center"
                         app:passwordToggleTint="@color/colorPrimary"
                         android:hint="Enter email or username"
                         android:inputType="textEmailAddress"
@@ -94,15 +78,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/text_me_one"
-                    android:text="Password"
-                    android:textColor="#FF5722"
-                    android:textSize="20dp" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -119,9 +95,7 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_lock_24px"
                         android:drawablePadding="10dp"
-                        android:gravity="center"
                         android:textColor="#000"
-                        android:textAlignment="center"
                         app:passwordToggleTint="@color/colorPrimary"
                         android:hint="Enter Password"
                         android:inputType="textPassword"
