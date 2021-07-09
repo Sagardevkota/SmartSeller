@@ -55,26 +55,11 @@ public class OrderDetails extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         getPassedValues();
-        binding.tvChangeDeliveredDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeDeliveredDate();
-
-            }
-        });
-        binding.tvChangeStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeStatus();
-
-            }
-        });
-
-        setupToolbar(view);
+        binding.tvChangeDeliveredDate.setOnClickListener(view12 -> changeDeliveredDate());
+        binding.tvChangeStatus.setOnClickListener(view1 -> changeStatus());
 
 
-
-         return view;
+        return view;
     }
 
     private void changeStatus() {
@@ -195,14 +180,15 @@ public class OrderDetails extends Fragment {
     }
 
     private void getPassedValues() {
-        Bundle b = getArguments();
-        OrderResponse orderResponse = b.getParcelable("orderObj");
+
+        OrderDetailsArgs orderDetailsArgs = OrderDetailsArgs.fromBundle(getArguments());
+        OrderResponse orderResponse = orderDetailsArgs.getOrder();
         Toasty.success(getContext(), orderResponse.getProductName()).show();
 
         //set
         orderId = orderResponse.getOrderId();
         binding.tvProductName.setText(orderResponse.getProductName());
-        binding.tvPrice.setText("Rs. " + String.valueOf(orderResponse.getPrice()));
+        binding.tvPrice.setText("Rs. " + orderResponse.getPrice());
         binding.tvDeliveryAddress.setText(orderResponse.getDeliveryAddress());
         binding.tvOrderedUserName.setText(orderResponse.getUserName());
         binding.tvQty.setText(String.valueOf(orderResponse.getQuantity()));
@@ -219,10 +205,11 @@ public class OrderDetails extends Fragment {
             binding.tvproductSize.setText("Size option not available");
         binding.tvproductSize.setText(String.valueOf(orderResponse.getSize()));
         try {
-            String url = orderResponse.getPicturePath();
+            String url = SmartAPI.IMG_BASE_URL+orderResponse.getPicturePath();
             Picasso.get()
                     .load(url)
                     .fit()
+                    .centerCrop()
                     .into(binding.ivProductImage, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -239,12 +226,5 @@ public class OrderDetails extends Fragment {
         }
     }
 
-    private void setupToolbar(View view) {
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
 
-        activity.setSupportActionBar(binding.toolbar);
-        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        activity. getSupportActionBar().setTitle(getString(R.string.app_name));
-        binding.toolbar.setNavigationOnClickListener(v -> Navigation.findNavController(view).navigateUp());
-    }
 }

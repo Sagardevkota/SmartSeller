@@ -81,7 +81,6 @@ public class addProductSecondPage extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         binding.tvNext.setOnClickListener(view1 -> passValues());
-        binding.tvPrevious.setOnClickListener(view12 -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new addProduct()).commit());
         setSpinners();
         setAttributes();
         return view;

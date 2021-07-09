@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:label="Account Fragment"
+        android:label="Account"
         tools:layout="@layout/fragment_account"
         android:name="com.example.smartseller.ui.home.AccountFragment.Account"
         >
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/account_edit_fragment"
-        android:label="Account Edit Fragment"
+        android:label="Edit Account"
         tools:layout="@layout/fragment_account_edit"
         android:name="com.example.smartseller.ui.home.AccountFragment.AccountEdit"
         >

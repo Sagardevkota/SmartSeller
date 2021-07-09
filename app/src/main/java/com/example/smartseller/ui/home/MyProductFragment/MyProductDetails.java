@@ -14,6 +14,7 @@ import com.example.smartseller.data.model.Products;
 import com.example.smartseller.data.network.JsonResponse;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentMyProductDetailsBinding;
+import com.example.smartseller.ui.home.HomeActivity;
 import com.example.smartseller.util.session.Session;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -47,10 +48,10 @@ public class MyProductDetails extends Fragment {
 
         binding.btnEdit.setOnClickListener(view12 -> {
 
-//            Products passedProduct = getArguments().getParcelable("product");
-//            MyProductDetailsDirections.ActionProductToItsDetailsEdit actionProductToItsDetailsEdit =
-//                    MyProductDetailsDirections.actionProductToItsDetailsEdit(passedProduct);
-//            Navigation.findNavController(view).navigate(actionProductToItsDetailsEdit);
+            Products passedProduct = getArguments().getParcelable("product");
+            MyProductDetailsDirections.ActionProductToItsDetailsEdit actionProductToItsDetailsEdit =
+                    MyProductDetailsDirections.actionProductToItsDetailsEdit(passedProduct);
+            Navigation.findNavController(view).navigate(actionProductToItsDetailsEdit);
 
         });
 
@@ -62,7 +63,8 @@ public class MyProductDetails extends Fragment {
 
         Bundle b = getArguments();
         Products products = b.getParcelable("product");
-        binding.tvProductTitle.setText(products.getProductName());
+        ((HomeActivity) getActivity()).getSupportActionBar().setTitle(products.getProductName());
+
         binding.ivDelete.setOnClickListener(view -> {
 
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getContext(), R.style.AlertDialog);
@@ -106,6 +108,7 @@ public class MyProductDetails extends Fragment {
             Picasso.get()
                     .load(url)
                     .fit()
+                    .centerCrop()
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .into(binding.ivProductImage, new Callback() {
                         @Override

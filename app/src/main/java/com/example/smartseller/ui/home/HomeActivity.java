@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import com.example.smartseller.NavigationExtensionsKt;
 import com.example.smartseller.R;
 import com.example.smartseller.databinding.ActivityHomeBinding;
+import com.example.smartseller.ui.home.MessageFragment.MessageFragment;
 import com.example.smartseller.util.session.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -36,10 +37,19 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_home );
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView( view );
         if (savedInstanceState == null) {
             this.setupBottomNavigationBar();
         }
+
+        binding.fabMessage.setOnClickListener(v -> getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container,new MessageFragment())
+                .commit());
+
     }
 
     protected void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
@@ -71,6 +81,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
         this.currentNavController = controller;
+
+
     }
 
     private void showExitDialog() {
@@ -105,8 +117,10 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        LiveData<NavController> var10000 = this.currentNavController;
-        if (var10000.getValue().getCurrentDestination().getLabel().equals("Home Fragment"))
+        LiveData<NavController> controllerLiveData = this.currentNavController;
+        String current = (String) controllerLiveData.getValue().getCurrentDestination().getLabel();
+        Log.i(TAG, "onBackPressed: "+current);
+        if (current.equals("Home"))
             showExitDialog();
         else
             super.onBackPressed();

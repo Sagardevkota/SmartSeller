@@ -18,7 +18,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.time.Instant;
-import java.util.Base64;
+
+import android.util.Base64;
+
 import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        session=new Session(MainActivity.this);
+        session = new Session(MainActivity.this);
         checkIfLoggedIn();
     }
 
@@ -40,45 +42,34 @@ public class MainActivity extends AppCompatActivity {
             String token = session.getToken();
             String[] split_string = token.split("\\.");
             String payload = split_string[1];
-            String body = new String(Base64.getDecoder().decode(payload));
+            String body = new String(Base64.decode(payload, Base64.DEFAULT));
             HashMap<String, String> map = new Gson().fromJson(body, new TypeToken<HashMap<String, String>>() {
             }.getType());
             String exp = map.get("exp");
 
-            if (checkISExpired(exp))
-            {
-                Toasty.error(getApplicationContext(),"Session expired").show();
+            if (checkISExpired(exp)) {
+                Toasty.error(getApplicationContext(), "Session expired").show();
                 session.destroy();
                 goToLoginActivity();
-            }
-            else
+            } else
                 goToHomeActivity();
 
-        }
-        else
+        } else
             goToLoginActivity();
 
 
-
     }
-
 
 
     private Boolean checkISExpired(String exp) {
-
-
         if (Instant.now().getEpochSecond() >= Long.valueOf(exp)) {
             Log.d("expired", "true");
             return true;
-        }
-        else
+        } else
             return false;
 
 
-
     }
-
-
 
 
     private void goToLoginActivity() {
@@ -87,13 +78,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
     public void goToHomeActivity() {
         Intent i = new Intent(this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
-
-
 
 
 }

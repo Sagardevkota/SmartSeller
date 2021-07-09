@@ -1,5 +1,6 @@
 package com.example.smartseller.ui.home.AccountFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,9 @@ import com.example.smartseller.R;
 import com.example.smartseller.data.model.User;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentAccountBinding;
+import com.example.smartseller.ui.auth.LoginActivity;
 import com.example.smartseller.util.session.Session;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,6 +52,21 @@ public class Account extends Fragment {
 
 
         }));
+
+        binding.ivLogout.setOnClickListener(view1 -> {
+
+            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getContext(), R.style.AlertDialog);
+            alertDialogBuilder.setTitle("Confirmation").setMessage("Are you sure you want to logout")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> {
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        session.destroy();
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss()).create().show();
+            ;
+
+        });
         return view;
     }
 

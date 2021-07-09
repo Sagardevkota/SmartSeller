@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/myproductFragment"
-        android:label="My Product Fragment"
+        android:label="My Products"
         android:name="com.example.smartseller.ui.home.MyProductFragment.MyProduct"
         tools:layout="@layout/fragment_my_product"
         >
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/myproductDetailsFragment"
-        android:label="My Product Details Fragment"
+        android:label="My Product Details"
         android:name="com.example.smartseller.ui.home.MyProductFragment.MyProductDetails"
         tools:layout="@layout/fragment_my_product_details"
         >
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/myproductDetailsEditFragment"
-        android:label="My Product Details Edit Fragment"
+        android:label="Edit Product"
         android:name="com.example.smartseller.ui.home.MyProductFragment.MyProductDetailsEdit"
         tools:layout="@layout/fragment_my_product_details_edit"
         >

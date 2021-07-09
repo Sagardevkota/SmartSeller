@@ -37,7 +37,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Base64;
+import android.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,23 +54,6 @@ public class home extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         checkIfExpired();
-
-
-        binding.ivLogout.setOnClickListener(view1 -> {
-
-            MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(getContext(), R.style.AlertDialog);
-            alertDialogBuilder.setTitle("Confirmation").setMessage("Are you sure you want to logout")
-                    .setPositiveButton("Yes", (dialogInterface, i) -> {
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        session.destroy();
-                        startActivity(intent);
-                    })
-                    .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss()).create().show();
-            ;
-
-        });
-
 
         setLineChart();
         setPieChart();
@@ -140,7 +123,7 @@ public class home extends Fragment {
         String token = session.getToken();
         String[] split_string = token.split("\\.");
         String payload = split_string[1];
-        String body = new String(Base64.getDecoder().decode(payload));
+        String body = new String(Base64.decode(payload,Base64.DEFAULT));
         HashMap<String, String> map = new Gson().fromJson(body, new TypeToken<HashMap<String, String>>() {
         }.getType());
         String exp = map.get("exp");

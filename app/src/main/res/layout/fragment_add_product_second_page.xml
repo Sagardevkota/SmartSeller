@@ -246,14 +246,14 @@ android:orientation="vertical"
                     android:layout_marginBottom="10dp"
                     >
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/tvAddColors"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Click here to add colors"
-                        android:layout_gravity="center"
+                        app:tint="@color/colorPrimaryDark"
+                        android:text="+"
                         android:layout_alignParentEnd="true"
-
+                        android:src="@drawable/ic_add_24"
                         />
 
                     <TextView
@@ -282,15 +282,16 @@ android:orientation="vertical"
                     android:layout_height="wrap_content"
                     >
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/tvAddSizes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Click here to add sizes"
-                        android:layout_gravity="center"
+                        app:tint="@color/colorPrimaryDark"
+                        android:text="+"
                         android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_add_24"
+                         />
 
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -313,39 +314,20 @@ android:orientation="vertical"
                     />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_marginTop="16dp"
-                >
 
-
-            <TextView
-                android:id="@+id/tvPrevious"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Previous"
-                android:textAlignment="center"
-                android:layout_weight="0.5"
-                android:layout_marginEnd="20dp"
-                android:textSize="18sp"
-                android:textColor="#B22222"/>
-
-
-
-                <TextView
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/tvNext"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:textSize="18sp"
-                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="Upload"
                     android:textAlignment="center"
-                    android:textColor="#006400"/>
+                    android:textColor="@color/White" />
 
-            </LinearLayout>
+
 
         </LinearLayout>
 

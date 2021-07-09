@@ -86,11 +86,7 @@ public class MyProductDetailsEdit extends Fragment {
             startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
         });
         binding.btnSave.setOnClickListener(view12 -> getAndPutValues());
-        binding.ivBack.setOnClickListener(view13 -> {
-          
-            getActivity().getSupportFragmentManager().popBackStack();
 
-        });
         return view;
     }
 
@@ -223,6 +219,7 @@ public class MyProductDetailsEdit extends Fragment {
             Picasso.get()
                     .load(url)
                     .fit()
+                    .centerCrop()
                     .into(binding.ivProductImage, new Callback() {
                         @Override
                         public void onSuccess() {

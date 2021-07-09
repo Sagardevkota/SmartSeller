@@ -52,7 +52,7 @@ public class SmartAPI {
                     .build();
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(base_url)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(okHttpClient)

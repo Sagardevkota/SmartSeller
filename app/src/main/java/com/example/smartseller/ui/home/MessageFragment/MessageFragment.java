@@ -31,64 +31,52 @@ import retrofit2.Response;
 public class MessageFragment extends Fragment {
 
     private FragmentMessageBinding messageBinding;
-    private ArrayList<MessageResponse> messageResponses=new ArrayList<>();
+    private ArrayList<MessageResponse> messageResponses = new ArrayList<>();
     private MessageAdapter messageAdapter;
-
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        messageBinding=FragmentMessageBinding.inflate(getLayoutInflater());
-        View view=messageBinding.getRoot();
+        messageBinding = FragmentMessageBinding.inflate(getLayoutInflater());
+        View view = messageBinding.getRoot();
         getConversations();
         initRecyclerView();
         return view;
     }
 
     private void initRecyclerView() {
-        messageAdapter=new MessageAdapter(messageResponses,getContext());
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
+        messageAdapter = new MessageAdapter(messageResponses, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         messageBinding.rvMessage.setAdapter(messageAdapter);
         messageBinding.rvMessage.setLayoutManager(layoutManager);
-        messageBinding.ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),HomeActivity.class);
-                startActivity(intent);
-                    }
+        messageBinding.ivBack.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
         });
-        messageAdapter.setOnItemClickListener(new MessageAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                MessageResponse messageResponse=messageResponses.get(position);
-                Integer productId=messageResponse.getProduct_id();
-                String productName=messageResponse.getProduct_name();
-                Bundle b=new Bundle();
-                MessageDetails messageDetails=new MessageDetails();
-                b.putInt("product_id",productId);
-                b.putString("product_name",productName);
-                messageDetails.setArguments(b);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,messageDetails).commit();
-            }
+        messageAdapter.setOnItemClickListener(position -> {
+            MessageResponse messageResponse = messageResponses.get(position);
+            Integer productId = messageResponse.getProduct_id();
+            String productName = messageResponse.getProduct_name();
+            Bundle b = new Bundle();
+            MessageDetails messageDetails = new MessageDetails();
+            b.putInt("product_id", productId);
+            b.putString("product_name", productName);
+            messageDetails.setArguments(b);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, messageDetails).commit();
         });
     }
 
     private void getConversations() {
-        Session session=new Session(getContext());
-        Call<List<MessageResponse>> call= SmartAPI.getApiService().getConversations(session.getJWT());
+        Session session = new Session(getContext());
+        Call<List<MessageResponse>> call = SmartAPI.getApiService().getConversations(session.getJWT());
         call.enqueue(new Callback<List<MessageResponse>>() {
             @Override
             public void onResponse(Call<List<MessageResponse>> call, Response<List<MessageResponse>> response) {
-                if (response.isSuccessful())
-                {
-                    for (MessageResponse messageResponse:response.body())
-                    {
-                        messageResponses.add(new MessageResponse(messageResponse));
-                    }
-                    messageAdapter.notifyDataSetChanged();
+                if (response.isSuccessful()) {
+                    messageResponses.addAll(response.body());
+                    messageAdapter.notifyItemRangeInserted(0,response.body().size());
                 }
             }
 

@@ -10,7 +10,6 @@ public class MessageResponse {
     private String date;
 
 
-
     public MessageResponse(Integer product_id, String picture_path, String product_name, String message, String user_name,String date) {
         this.product_id = product_id;
         this.picture_path = picture_path;

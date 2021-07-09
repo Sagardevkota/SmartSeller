@@ -3,6 +3,7 @@ package com.example.smartseller.ui.home.orders.fragments.innerFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.example.smartseller.data.model.OrderResponse;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentNewOrdersBinding;
 import com.example.smartseller.ui.home.adapter.OrderAdapter;
+import com.example.smartseller.ui.home.orders.fragments.mainFragment.OrdersDirections;
 import com.example.smartseller.util.session.Session;
 
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
+import jp.wasabeef.recyclerview.animators.OvershootInRightAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +49,7 @@ public class NewOrders extends Fragment {
         session = new Session(getActivity());
         getOrders();
 
-        initRecyclerView();
+        initRecyclerView(view);
         return view;
     }
 
@@ -61,21 +66,19 @@ public class NewOrders extends Fragment {
 
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(View view) {
         orderAdapter = new OrderAdapter(orderResponseList, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.rvNewOrder.setLayoutManager(layoutManager);
         binding.rvNewOrder.setAdapter(orderAdapter);
+
+        binding.rvNewOrder.setItemAnimator(null);
         orderAdapter.setOnItemClickListener(position -> {
             OrderResponse orderResponse = orderResponseList.get(position);
-            Bundle args = new Bundle();
-            args.putParcelable("orderObj", orderResponse);
-            OrderDetails orderDetails = new OrderDetails();
-            orderDetails.setArguments(args);
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .addToBackStack("NEW_ORDERS")
-                    .replace(R.id.fragment_container, orderDetails).commit();
+
+            OrdersDirections.ActionToOrderDetails actionToOrderDetails =
+                    OrdersDirections.actionToOrderDetails(orderResponse);
+            Navigation.findNavController(view).navigate(actionToOrderDetails);
 
         });
     }

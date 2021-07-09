@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.smartseller.R;
 import com.example.smartseller.data.model.Products;
 import com.example.smartseller.databinding.FragmentAddProductBinding;
@@ -48,7 +50,7 @@ public class addProduct extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAddProductBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        binding.tvNext.setOnClickListener(view1 -> passValue());
+        binding.tvNext.setOnClickListener(view1 -> passValue(view1));
         binding.btnSelectImage.setOnClickListener(view12 -> {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
             photoPickerIntent.setType("image/*");
@@ -58,9 +60,8 @@ public class addProduct extends Fragment {
         return view;
     }
 
-    private void passValue() {
-        addProductSecondPage apf = new addProductSecondPage();
-        Bundle args = new Bundle();
+    private void passValue(View view) {
+
         if (validateProductName() && validateProductDesc() && validatePrice() && validateImage()) {
             String product_name = binding.etProductName.getText().toString().trim();
             String product_desc = binding.etProductDesc.getText().toString().trim();
@@ -72,10 +73,10 @@ public class addProduct extends Fragment {
                     .price(price)
                     .picturePath(imgPath)
                     .build();
-            args.putParcelable("product", products);
-            apf.setArguments(args);
 
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, apf).commit();
+            addProductDirections.ActionProductSecondPage actionProductSecondPage =
+                    addProductDirections.actionProductSecondPage(products);
+            Navigation.findNavController(view).navigate(actionProductSecondPage);
 
         } else
             Toasty.error(getContext(), "Fill up valid information").show();

@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:padding="1dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:layout_alignParentTop="true"
                 app:srcCompat="@color/colorAccent" />
 
