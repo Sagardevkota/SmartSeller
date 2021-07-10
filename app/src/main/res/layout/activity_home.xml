@@ -24,6 +24,15 @@
 
         />
 
+    <FrameLayout
+        android:id="@+id/fragment_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:visibility="gone"
+
+        />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

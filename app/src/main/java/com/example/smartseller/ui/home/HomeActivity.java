@@ -44,11 +44,13 @@ public class HomeActivity extends AppCompatActivity {
             this.setupBottomNavigationBar();
         }
 
-        binding.fabMessage.setOnClickListener(v -> getSupportFragmentManager()
+        binding.fabMessage.setOnClickListener(v -> {getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.fragment_container,new MessageFragment())
-                .commit());
+                .replace(R.id.fragment_message,new MessageFragment())
+                .commit();
+        binding.fragmentMessage.setVisibility(View.VISIBLE);
+        });
 
     }
 

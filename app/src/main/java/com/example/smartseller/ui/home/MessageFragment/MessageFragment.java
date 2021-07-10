@@ -52,6 +52,7 @@ public class MessageFragment extends Fragment {
         messageBinding.rvMessage.setAdapter(messageAdapter);
         messageBinding.rvMessage.setLayoutManager(layoutManager);
         messageBinding.ivBack.setOnClickListener(view -> {
+            getActivity().finish();
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
         });
@@ -64,7 +65,9 @@ public class MessageFragment extends Fragment {
             b.putInt("product_id", productId);
             b.putString("product_name", productName);
             messageDetails.setArguments(b);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, messageDetails).commit();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction().replace(R.id.fragment_message, messageDetails).commit();
+
         });
     }
 

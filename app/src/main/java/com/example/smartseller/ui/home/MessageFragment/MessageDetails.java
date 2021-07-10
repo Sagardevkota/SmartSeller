@@ -29,42 +29,43 @@ import retrofit2.Response;
 
 
 public class MessageDetails extends Fragment {
-    
+
     private FragmentMessageDetailsBinding binding;
-    ArrayList<ConversationResponse> conversationResponseList=new ArrayList<>();
+    ArrayList<ConversationResponse> conversationResponseList = new ArrayList<>();
     ConversationAdapter conversationAdapter;
     private Session session;
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding=FragmentMessageDetailsBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
-        session=new Session(getContext());
-        Integer productId=getArguments().getInt("product_id");
+        binding = FragmentMessageDetailsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        session = new Session(getContext());
+        Integer productId = getArguments().getInt("product_id");
         binding.tvProductTitle.setText(getArguments().getString("product_name"));
 
 
         getConversation(productId);
         binding.buSend.setOnClickListener(view1 -> {
-            String message=binding.etMessage.getText().toString().trim();
-            addConversation(message,productId);
+            String message = binding.etMessage.getText().toString().trim();
+            addConversation(message, productId);
         });
 
-        binding.ivBack.setOnClickListener(view12 -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MessageFragment()).commit());
+        binding.ivBack.setOnClickListener(view12 -> getActivity().getSupportFragmentManager()
+                .beginTransaction().replace(R.id.fragment_message, new MessageFragment()).commit());
         initRecyclerView();
         return view;
     }
 
     private void getConversation(Integer productId) {
-        Session session=new Session(getContext());
-        Call<List<ConversationResponse>> getConversation= SmartAPI.getApiService().getConversation(session.getJWT(),productId);
+        Session session = new Session(getContext());
+        Call<List<ConversationResponse>> getConversation = SmartAPI.getApiService().getConversation(session.getJWT(), productId);
         getConversation.enqueue(new Callback<List<ConversationResponse>>() {
             @Override
             public void onResponse(Call<List<ConversationResponse>> call, Response<List<ConversationResponse>> response) {
-                if (response.isSuccessful()){
-                    for (ConversationResponse c:response.body()){
+                if (response.isSuccessful()) {
+                    for (ConversationResponse c : response.body()) {
                         conversationResponseList.add(new ConversationResponse(c));
                         conversationAdapter.notifyDataSetChanged();
                     }
@@ -79,26 +80,25 @@ public class MessageDetails extends Fragment {
     }
 
     private void initRecyclerView() {
-        conversationAdapter=new ConversationAdapter(conversationResponseList,getContext());
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
+        conversationAdapter = new ConversationAdapter(conversationResponseList, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.rvQuestion.setAdapter(conversationAdapter);
         binding.rvQuestion.setLayoutManager(layoutManager);
 
 
     }
 
-    private void addConversation(String message,Integer productId){
-        String Instantdate= Instant.now().toString();
-        String date=Instantdate.substring(0,10);
-        Conversation conversation=new Conversation(message,session.getUserId(),date,productId);
-        Call<JsonResponse> addConversation=SmartAPI.getApiService().addConversation(session.getJWT(),conversation);
+    private void addConversation(String message, Integer productId) {
+        String Instantdate = Instant.now().toString();
+        String date = Instantdate.substring(0, 10);
+        Conversation conversation = new Conversation(message, session.getUserId(), date, productId);
+        Call<JsonResponse> addConversation = SmartAPI.getApiService().addConversation(session.getJWT(), conversation);
         addConversation.enqueue(new Callback<JsonResponse>() {
             @Override
             public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                if (response.isSuccessful()){
-                    if (response.body().getStatus().equalsIgnoreCase("200 OK"))
-                    {
-                        conversationResponseList.add(new ConversationResponse(conversation.getMessage(),session.getusername(),date));
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().equalsIgnoreCase("200 OK")) {
+                        conversationResponseList.add(new ConversationResponse(conversation.getMessage(), session.getusername(), date));
                         conversationAdapter.notifyDataSetChanged();
                         binding.etMessage.getText().clear();
                     }
