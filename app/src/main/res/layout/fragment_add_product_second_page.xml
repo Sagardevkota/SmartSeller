@@ -328,6 +328,15 @@ android:orientation="vertical"
                     android:textColor="@color/White" />
 
 
+            <TextView
+                android:id="@+id/tvRequestPermission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="You havent allowed permission!! To request again click here \n
+                If nothing appears allow permission manually from settings"
+                />
 
         </LinearLayout>
 

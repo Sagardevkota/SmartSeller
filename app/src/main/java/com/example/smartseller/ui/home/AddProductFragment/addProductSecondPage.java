@@ -1,11 +1,15 @@
 package com.example.smartseller.ui.home.AddProductFragment;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
@@ -39,9 +43,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import es.dmoral.toasty.Toasty;
+import io.reactivex.internal.operators.observable.ObservableNever;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
@@ -53,13 +59,13 @@ public class addProductSecondPage extends Fragment {
 
 
     private static final String TAG = "ADD_PRODUCT_SECOND_PAGE";
+    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 0;
     private FragmentAddProductSecondPageBinding binding;
     private String selectedCategory = "";
     private String selectedType = "";
     private Session session;
     private final Set<String> colorSet = new HashSet<>();
     private final Set<String> sizeSet = new HashSet<>();
-
 
 
     public addProductSecondPage() {
@@ -81,8 +87,10 @@ public class addProductSecondPage extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         binding.tvNext.setOnClickListener(view1 -> passValues());
+        binding.tvRequestPermission.setOnClickListener(v -> requestPermission());
         setSpinners();
         setAttributes();
+        checkPermission();
         return view;
     }
 
@@ -155,7 +163,10 @@ public class addProductSecondPage extends Fragment {
 
 
     }
+
     private void postProduct(Products products) {
+
+        checkPermission();
 
         File file = new File(products.getPicturePath());
         RequestBody requestFile =
@@ -164,29 +175,57 @@ public class addProductSecondPage extends Fragment {
 // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        Log.i(TAG, "postProduct: "+products.toString());
+        Log.i(TAG, "postProduct: " + products.toString());
 
 
         showProgressDialog("Adding Product");
 
-        SmartAPI.getApiService().addProduct(session.getJWT(), products,body)
+        SmartAPI.getApiService().addProduct(session.getJWT(), products, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(jsonResponse -> {
                     if (jsonResponse.getStatus().equalsIgnoreCase("200 OK")) {
 
-                        Toasty.success(getContext(),jsonResponse.getMessage(),Toasty.LENGTH_SHORT).show();
+                        Toasty.success(getContext(), jsonResponse.getMessage(), Toasty.LENGTH_SHORT).show();
                         hideProgressDialog();
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container,new addProduct())
-                                .commit();
+                        getActivity().getSupportFragmentManager().popBackStack();
 
                     } else
                         Toasty.error(getContext(), jsonResponse.getMessage()).show();
                 }, throwable -> Log.e(TAG, "postProduct: " + throwable.getMessage()));
 
     }
+
+    private void checkPermission() {
+        binding.tvNext.setEnabled(false);
+        binding.tvRequestPermission.setVisibility(View.VISIBLE);
+
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                binding.tvRequestPermission.setVisibility(View.VISIBLE);
+
+            } else {
+                // No explanation needed; request the permission
+                requestPermission();
+
+            }
+        } else {
+            binding.tvNext.setEnabled(true);
+            binding.tvRequestPermission.setVisibility(View.GONE);
+        }
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(requireActivity(),
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+    }
+
 
 
 
@@ -210,13 +249,12 @@ public class addProductSecondPage extends Fragment {
                         String addedColor = edittext.getText().toString();
                         if (colorSet.stream()
                                 .anyMatch(color ->
-                                        color.equalsIgnoreCase(addedColor)))
-                        {
-                            Toasty.error(getContext(),addedColor+" already exists",Toasty.LENGTH_SHORT).show();
+                                        color.equalsIgnoreCase(addedColor))) {
+                            Toasty.error(getContext(), addedColor + " already exists", Toasty.LENGTH_SHORT).show();
                             return;
                         }
                         colorSet.add(addedColor);
-                        binding.colorChipGroup.addView(createChip(addedColor,binding.colorChipGroup));
+                        binding.colorChipGroup.addView(createChip(addedColor, binding.colorChipGroup));
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
@@ -245,14 +283,13 @@ public class addProductSecondPage extends Fragment {
                         String addedSize = edittext.getText().toString();
                         if (sizeSet.stream()
                                 .anyMatch(size ->
-                                        size.equalsIgnoreCase(addedSize)))
-                        {
-                            Toasty.error(getContext(),addedSize+" already exists",Toasty.LENGTH_SHORT).show();
+                                        size.equalsIgnoreCase(addedSize))) {
+                            Toasty.error(getContext(), addedSize + " already exists", Toasty.LENGTH_SHORT).show();
                             return;
                         }
 
                         sizeSet.add(addedSize);
-                        binding.sizeChipGroup.addView(createChip(addedSize,binding.sizeChipGroup));
+                        binding.sizeChipGroup.addView(createChip(addedSize, binding.sizeChipGroup));
                     })
                     .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
                     .show();
@@ -283,9 +320,6 @@ public class addProductSecondPage extends Fragment {
     }
 
 
-
-
-
     private Chip createChip(String text, ChipGroup viewGroup) {
         Chip chip =
                 (Chip) getLayoutInflater()
@@ -312,9 +346,9 @@ public class addProductSecondPage extends Fragment {
         return binding.etSku.getText().length() != 0;
     }
 
-    private static RequestBody toRequestBody (String value) {
+    private static RequestBody toRequestBody(String value) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);
-        return body ;
+        return body;
     }
 
 

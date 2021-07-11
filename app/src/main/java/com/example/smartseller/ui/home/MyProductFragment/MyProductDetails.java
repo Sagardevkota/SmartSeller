@@ -136,7 +136,7 @@ public class MyProductDetails extends Fragment {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equalsIgnoreCase("200 OK")) {
                         Toasty.success(getContext(), response.body().getMessage()).show();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MyProduct()).commit();
+                        ((HomeActivity)getActivity()).onSupportNavigateUp();
                     }
                 }
             }

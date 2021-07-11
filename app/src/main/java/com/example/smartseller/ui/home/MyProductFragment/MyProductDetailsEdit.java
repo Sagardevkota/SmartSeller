@@ -87,6 +87,7 @@ public class MyProductDetailsEdit extends Fragment {
         });
         binding.btnSave.setOnClickListener(view12 -> getAndPutValues());
 
+
         return view;
     }
 
@@ -125,6 +126,7 @@ public class MyProductDetailsEdit extends Fragment {
 
         //if user chooses from gallery path of file in internal sd is not null
         if (imgPath.length()!=0){
+            requestPermission();
             File file = new File(imgPath);
              RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -359,6 +361,7 @@ public class MyProductDetailsEdit extends Fragment {
             ActivityCompat
                     .requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_PERMISSIONS);
         }
+        else binding.btnSave.setVisibility(View.VISIBLE);
     }
 
     @Override

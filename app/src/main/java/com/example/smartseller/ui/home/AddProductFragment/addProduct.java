@@ -50,6 +50,7 @@ public class addProduct extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAddProductBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        clearField();
         binding.tvNext.setOnClickListener(view1 -> passValue(view1));
         binding.btnSelectImage.setOnClickListener(view12 -> {
             Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -58,6 +59,13 @@ public class addProduct extends Fragment {
         });
 
         return view;
+    }
+
+    private void clearField() {
+        binding.etProductName.getText().clear();
+        binding.etProductName.getText().clear();
+        binding.etPrice.getText().clear();
+
     }
 
     private void passValue(View view) {

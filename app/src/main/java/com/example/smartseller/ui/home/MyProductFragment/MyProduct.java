@@ -60,6 +60,8 @@ public class MyProduct extends Fragment {
         return view;
     }
 
+
+
     private void initRecyclerView() {
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         adapter = new ListAdapter(productsArrayList, getContext());
