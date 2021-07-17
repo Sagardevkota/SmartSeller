@@ -54,6 +54,7 @@ public class home extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         checkIfExpired();
+        ((HomeActivity)requireActivity()).fabMsgVisibility(true);
 
         setLineChart();
         setPieChart();

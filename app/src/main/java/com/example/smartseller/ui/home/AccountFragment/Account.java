@@ -15,6 +15,7 @@ import com.example.smartseller.data.model.User;
 import com.example.smartseller.data.network.SmartAPI;
 import com.example.smartseller.databinding.FragmentAccountBinding;
 import com.example.smartseller.ui.auth.LoginActivity;
+import com.example.smartseller.ui.home.HomeActivity;
 import com.example.smartseller.util.session.Session;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -37,7 +38,8 @@ public class Account extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        session = new Session(getContext());
+        session = new Session(requireActivity());
+        ((HomeActivity)requireActivity()).fabMsgVisibility(false);
         getAccountDetails();
 
         binding.ivEdit.setOnClickListener((view1 -> {

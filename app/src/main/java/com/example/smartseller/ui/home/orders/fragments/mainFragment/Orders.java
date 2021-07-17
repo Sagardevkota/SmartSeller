@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartseller.R;
+import com.example.smartseller.ui.home.HomeActivity;
 import com.example.smartseller.ui.home.adapter.TabPagerAdapter;
 import com.example.smartseller.ui.home.homeFragment.home;
 import com.example.smartseller.ui.home.orders.fragments.innerFragments.CompletedOrders;
@@ -35,6 +36,7 @@ public class Orders extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_orders, container, false);
+        ((HomeActivity)requireActivity()).fabMsgVisibility(false);
         tabLayout = v.findViewById(R.id.tab_layout);
         viewPager = v.findViewById(R.id.fragment_container);
         return v;

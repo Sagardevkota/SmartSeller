@@ -87,7 +87,6 @@ public class addProductSecondPage extends Fragment {
         View view = binding.getRoot();
         session = new Session(getContext());
         binding.tvNext.setOnClickListener(view1 -> passValues());
-        binding.tvRequestPermission.setOnClickListener(v -> requestPermission());
         setSpinners();
         setAttributes();
         checkPermission();
@@ -197,8 +196,6 @@ public class addProductSecondPage extends Fragment {
     }
 
     private void checkPermission() {
-        binding.tvNext.setEnabled(false);
-        binding.tvRequestPermission.setVisibility(View.VISIBLE);
 
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
@@ -207,16 +204,12 @@ public class addProductSecondPage extends Fragment {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                binding.tvRequestPermission.setVisibility(View.VISIBLE);
 
             } else {
                 // No explanation needed; request the permission
                 requestPermission();
 
             }
-        } else {
-            binding.tvNext.setEnabled(true);
-            binding.tvRequestPermission.setVisibility(View.GONE);
         }
     }
 

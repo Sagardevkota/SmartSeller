@@ -183,7 +183,6 @@ public class OrderDetails extends Fragment {
 
         OrderDetailsArgs orderDetailsArgs = OrderDetailsArgs.fromBundle(getArguments());
         OrderResponse orderResponse = orderDetailsArgs.getOrder();
-        Toasty.success(getContext(), orderResponse.getProductName()).show();
 
         //set
         orderId = orderResponse.getOrderId();
@@ -197,13 +196,12 @@ public class OrderDetails extends Fragment {
         binding.tvOrderedContactNum.setText(orderResponse.getPhone());
 
         binding.tvDeliveredDate.setText(orderResponse.getDeliveredDate());
-        if (orderResponse.getColor() == null)
+        if (orderResponse.getProductColor() == null)
             binding.tvProductColor.setText("Color option not available");
         else
-            binding.tvProductColor.setText(orderResponse.getColor());
-        if (orderResponse.getSize() == null)
-            binding.tvproductSize.setText("Size option not available");
-        binding.tvproductSize.setText(String.valueOf(orderResponse.getSize()));
+            binding.tvProductColor.setText(orderResponse.getProductColor());
+
+        binding.tvproductSize.setText(String.valueOf(orderResponse.getProductSize()));
         try {
             String url = SmartAPI.IMG_BASE_URL+orderResponse.getPicturePath();
             Picasso.get()

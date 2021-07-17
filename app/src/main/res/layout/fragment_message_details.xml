@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/White"
     android:orientation="vertical"
 
- >
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,44 +15,36 @@
         android:orientation="vertical">
 
 
-
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:elevation="1dp"
-            >
+            android:elevation="1dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
-                <ImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/ivBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_back_24"
-                    app:tint="@color/colorPrimaryDark"
                     android:layout_centerVertical="true"
-                    />
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    app:tint="@color/colorPrimaryDark" />
 
                 <TextView
                     android:id="@+id/tvProductTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="My Products"
-                    android:maxLines="1"
-                    android:layout_marginStart="50dp"
-                    android:textSize="18sp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
                     android:fontFamily="sans-serif-condensed-medium"
+                    android:maxLines="1"
+                    android:text="My Products"
+                    android:textSize="18sp"
 
                     />
-
-
-
 
 
             </RelativeLayout>
@@ -60,85 +52,66 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
 
-
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Questions About This Product"
-            android:textSize="16sp"
-            android:padding="8dp"
             android:layout_marginBottom="5dp"
-            />
-
+            android:padding="8dp"
+            android:text="Questions About This Product"
+            android:textSize="16sp" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQuestion"
-            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
-            />
-
-
-
-
-
+            android:padding="8dp" />
 
 
     </LinearLayout>
 
 
-
-        <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:padding="8dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/White"
-        >
-            <com.google.android.material.textfield.TextInputLayout
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="8dp">
+
+        <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            app:placeholderTextColor="#000">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="#f8f9fc"
+                android:gravity="start"
+                android:hint="Enter message"
+                android:inputType="textMultiLine"
+                android:textColor="#000"
 
-                app:placeholderTextColor="#000"
-                android:layout_marginEnd="40dp"
-                >
+                />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/etMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:textColor="#000"
-                    android:hint="Enter message"
-                    android:inputType="textMultiLine"
-                    android:background="#f8f9fc"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-            <ImageView
+        <ImageView
             android:id="@+id/buSend"
+            app:tint="@color/colorPrimary"
             android:layout_width="30dp"
             android:layout_height="40dp"
-            android:text="SEND"
-                android:src="@drawable/ic_baseline_send_24"
-                android:layout_centerVertical="true"
-                android:tint="@color/colorPrimary"
-
-
-
-
             android:layout_alignParentRight="true"
-            />
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_send_24"
+            android:text="SEND" />
+
     </RelativeLayout>
 
 </RelativeLayout>

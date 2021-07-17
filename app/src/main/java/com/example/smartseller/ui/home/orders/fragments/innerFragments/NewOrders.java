@@ -2,6 +2,7 @@ package com.example.smartseller.ui.home.orders.fragments.innerFragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,12 +42,12 @@ public class NewOrders extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentNewOrdersBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        session = new Session(getActivity());
+        session = new Session(requireActivity());
         getOrders();
 
         initRecyclerView(view);

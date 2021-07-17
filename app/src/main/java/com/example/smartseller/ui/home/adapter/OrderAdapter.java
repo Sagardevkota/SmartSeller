@@ -58,8 +58,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewholder
         holder.tvPrice.setText("Rs. " + orderResponse.getPrice());
         holder.tvDeliveredDate.setText("Delivered date: " + orderResponse.getDeliveredDate());
         holder.tvDeliveryAddress.setText("Delivery address: " + orderResponse.getDeliveryAddress());
-        String color = orderResponse.getColor();
-        Float size = orderResponse.getSize();
+        String color = orderResponse.getProductColor();
+        Float size = orderResponse.getProductSize();
         if (color == null) holder.tvColor.setText("Color: No color option available");
         else holder.tvColor.setText("Color: " + color);
         if (size == null) holder.tvSize.setText("Size: No size option available");
@@ -130,14 +130,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewholder
             tvColor = itemView.findViewById(R.id.tvColor);
             tvSize = itemView.findViewById(R.id.tvSize);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
                     }
                 }
             });

@@ -11,76 +11,39 @@ import lombok.Data;
 public class OrderResponse implements Parcelable {
 
 
-    private Integer orderId;
-
-    private Integer productId;
-
+    private int orderId;
+    private int productId;
     private String userName;
-
     private String phone;
-
-
-    private String color;
-
-    private Float size;
-
-    private Integer price;
-
-    private Integer quantity;
-
+    private String productColor;
+    private float productSize;
+    private int price;
+    private int quantity;
     private String orderedDate;
-
     private String deliveredDate;
-
     private String deliveryAddress;
-
     private String status;
-
     //productsInfo
     private String productName;
-    private Integer discount;
+    private int discount;
     private String picturePath;
 
 
     protected OrderResponse(Parcel in) {
-        if (in.readByte() == 0) {
-            orderId = null;
-        } else {
-            orderId = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            productId = null;
-        } else {
-            productId = in.readInt();
-        }
+        orderId = in.readInt();
+        productId = in.readInt();
         userName = in.readString();
         phone = in.readString();
-        color = in.readString();
-        if (in.readByte() == 0) {
-            size = null;
-        } else {
-            size = in.readFloat();
-        }
-        if (in.readByte() == 0) {
-            price = null;
-        } else {
-            price = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            quantity = null;
-        } else {
-            quantity = in.readInt();
-        }
+        productColor = in.readString();
+        productSize = in.readFloat();
+        price = in.readInt();
+        quantity = in.readInt();
         orderedDate = in.readString();
         deliveredDate = in.readString();
         deliveryAddress = in.readString();
         status = in.readString();
         productName = in.readString();
-        if (in.readByte() == 0) {
-            discount = null;
-        } else {
-            discount = in.readInt();
-        }
+        discount = in.readInt();
         picturePath = in.readString();
     }
 
@@ -102,51 +65,21 @@ public class OrderResponse implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        if (orderId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(orderId);
-        }
-        if (productId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(productId);
-        }
-        parcel.writeString(userName);
-        parcel.writeString(phone);
-        parcel.writeString(color);
-        if (size == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeFloat(size);
-        }
-        if (price == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(price);
-        }
-        if (quantity == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(quantity);
-        }
-        parcel.writeString(orderedDate);
-        parcel.writeString(deliveredDate);
-        parcel.writeString(deliveryAddress);
-        parcel.writeString(status);
-        parcel.writeString(productName);
-        if (discount == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(discount);
-        }
-        parcel.writeString(picturePath);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(orderId);
+        dest.writeInt(productId);
+        dest.writeString(userName);
+        dest.writeString(phone);
+        dest.writeString(productColor);
+        dest.writeFloat(productSize);
+        dest.writeInt(price);
+        dest.writeInt(quantity);
+        dest.writeString(orderedDate);
+        dest.writeString(deliveredDate);
+        dest.writeString(deliveryAddress);
+        dest.writeString(status);
+        dest.writeString(productName);
+        dest.writeInt(discount);
+        dest.writeString(picturePath);
     }
 }

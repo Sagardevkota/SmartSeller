@@ -4,17 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/drawable/ic_add_24.xml" value="0.34765625" />
-        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_home.xml" value="0.1162109375" />
+        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_login.xml" value="0.1871275327771156" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_account.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_add_product.xml" value="0.25089392133492255" />
-        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_add_product_second_page.xml" value="0.536" />
+        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_add_product_second_page.xml" value="0.38533834586466165" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_home.xml" value="0.25089392133492255" />
+        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_message.xml" value="0.2467222884386174" />
+        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_message_details.xml" value="0.1201171875" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_my_product_details.xml" value="0.4" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_my_product_details_edit.xml" value="0.2026221692491061" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/fragment_order_details.xml" value="0.25089392133492255" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/layout_order_list.xml" value="0.25089392133492255" />
         <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/layout_product_lists.xml" value="0.25089392133492255" />
+        <entry key="..\:/AndroidStudioProjects/SmartSeller/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4245398773006135" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_login.xml" value="0.1408514492753623" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/SmartSeller/app/src/main/res/layout/activity_main.xml" value="0.19785458879618595" />

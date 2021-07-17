@@ -22,6 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.smartseller.R;
 import com.example.smartseller.data.model.Products;
 import com.example.smartseller.databinding.FragmentAddProductBinding;
+import com.example.smartseller.ui.home.HomeActivity;
 import com.example.smartseller.ui.home.homeFragment.home;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,6 +51,7 @@ public class addProduct extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAddProductBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        ((HomeActivity)requireActivity()).fabMsgVisibility(false);
         clearField();
         binding.tvNext.setOnClickListener(view1 -> passValue(view1));
         binding.btnSelectImage.setOnClickListener(view12 -> {

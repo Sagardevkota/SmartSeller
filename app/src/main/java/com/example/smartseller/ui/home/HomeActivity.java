@@ -1,32 +1,23 @@
 package com.example.smartseller.ui.home;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.Navigation;
-
 
 import com.example.smartseller.NavigationExtensionsKt;
 import com.example.smartseller.R;
 import com.example.smartseller.databinding.ActivityHomeBinding;
 import com.example.smartseller.ui.home.MessageFragment.MessageFragment;
-import com.example.smartseller.util.session.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
 import java.util.List;
-
-import kotlin.collections.CollectionsKt;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -44,12 +35,15 @@ public class HomeActivity extends AppCompatActivity {
             this.setupBottomNavigationBar();
         }
 
-        binding.fabMessage.setOnClickListener(v -> {getSupportFragmentManager()
+        binding.fabMessage.setOnClickListener(v -> {
+            getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_message,new MessageFragment())
                 .commit();
         binding.fragmentMessage.setVisibility(View.VISIBLE);
+        fabMsgVisibility(false);
+        binding.bottomNav.setVisibility(View.GONE);
         });
 
     }
@@ -63,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
     void setupBottomNavigationBar() {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         List<Integer> navGraphIds = Arrays.asList(
                 R.navigation.home,
                 R.navigation.account,
@@ -101,12 +96,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public boolean onSupportNavigateUp() {
-        LiveData<NavController> var10000 = this.currentNavController;
+        LiveData<NavController> navControllerLiveData = this.currentNavController;
         boolean var2;
-        if (var10000 != null) {
-            NavController var1 = var10000.getValue();
-             if (var1 != null) {
-                var2 = var1.navigateUp();
+        if (navControllerLiveData != null) {
+            NavController controller = navControllerLiveData.getValue();
+             if (controller != null) {
+                var2 = controller.navigateUp();
                 return var2;
             }
 
@@ -126,5 +121,15 @@ public class HomeActivity extends AppCompatActivity {
             showExitDialog();
         else
             super.onBackPressed();
+    }
+
+    public void fabMsgVisibility(boolean enabled){
+        if (enabled) {
+            binding.fabMessage.setVisibility(View.VISIBLE);
+        } else {
+            binding.fabMessage.setVisibility(View.GONE);
+        }
+
+
     }
 }
