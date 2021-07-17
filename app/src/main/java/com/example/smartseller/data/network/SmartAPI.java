@@ -36,8 +36,8 @@ public class SmartAPI {
 
     public static apiService apiService = null;
     //    public static String base_url="http://52.171.61.18:8080/";
-    public static String BASE_URL = "http://10.0.2.2:8081/";
-//    public static final String BASE_URL = "http://157.55.181.67:8080";//newest
+//    public static String BASE_URL = "http://10.0.2.2:8081/";
+    public static final String BASE_URL = "http://157.55.181.67:8080";//newest
 //    public static String base_url = "http://23.101.181.211:8080/";
 
     public static final String IMG_BASE_URL="https://bese2016smartstore.blob.core.windows.net/bese2016blob/";
